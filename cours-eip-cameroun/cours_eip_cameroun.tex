@@ -1,377 +1,403 @@
-% !TEX TS-program = lualatex
-% Cours de droit constitutionnel camerounais — préparation EIP
-% Version de travail mise à jour au 17 septembre 2026.
-\documentclass[11pt,a4paper,oneside]{book}
-
-\usepackage[a4paper,margin=2.2cm,headheight=16pt]{geometry}
-\usepackage{fontspec}
-\IfFontExistsTF{TeX Gyre Pagella}{\setmainfont{TeX Gyre Pagella}}{\setmainfont{Latin Modern Roman}}
-\IfFontExistsTF{TeX Gyre Heros}{\setsansfont{TeX Gyre Heros}}{\setsansfont{Latin Modern Sans}}
+% !TEX TS-program = pdflatex
+% Cours EIP — Président de la République et Parlement du Cameroun
+% Généré par build.py à partir de content.py. Données arrêtées au 17 septembre 2026.
+\documentclass[11pt,a4paper,oneside]{report}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
 \usepackage[french]{babel}
+\usepackage[a4paper,margin=2.2cm,headheight=15pt]{geometry}
+\usepackage{lmodern}
 \usepackage{microtype}
-\usepackage{booktabs,tabularx,longtable,array,multirow}
+\usepackage{booktabs,tabularx,longtable,array}
 \usepackage{enumitem}
-\usepackage{graphicx}
-\usepackage{tikz}
-\usetikzlibrary{calc,positioning,shadows.blur}
+\usepackage{xcolor}
 \usepackage[most]{tcolorbox}
 \usepackage{titlesec}
 \usepackage{fancyhdr}
 \usepackage{lastpage}
 \usepackage{hyperref}
-\usepackage{bookmark}
 \usepackage{xurl}
-\usepackage{ragged2e}
-\usepackage{amssymb}
 
-% --- Identité visuelle ---
 \definecolor{navy}{HTML}{12304A}
-\definecolor{blue}{HTML}{1F5A83}
+\definecolor{bluec}{HTML}{1F5A83}
 \definecolor{gold}{HTML}{C9962E}
-\definecolor{redcmr}{HTML}{A73535}
-\definecolor{ink}{HTML}{24313B}
-\definecolor{muted}{HTML}{64727D}
-\definecolor{pale}{HTML}{F2F6F8}
+\definecolor{redc}{HTML}{A73535}
+\definecolor{greenc}{HTML}{2E6B4F}
 \definecolor{paleblue}{HTML}{E7F0F5}
 \definecolor{palegold}{HTML}{FBF5E7}
 \definecolor{palered}{HTML}{FBEDED}
+\definecolor{palegrey}{HTML}{F1F4F6}
 
-\hypersetup{
-  colorlinks=true, linkcolor=navy, urlcolor=blue, citecolor=navy,
-  pdftitle={Le Président de la République et le Parlement au Cameroun},
-  pdfauthor={Préparation EIP — document de synthèse},
-  pdfsubject={Cours de droit constitutionnel camerounais},
-  pdfkeywords={Cameroun, Président de la République, Parlement, Assemblée nationale, Sénat, EIP}
-}
+\hypersetup{colorlinks=true,linkcolor=navy,urlcolor=bluec,
+  pdftitle={Le Président de la République et le Parlement au Cameroun},pdfauthor={Préparation EIP},
+  pdfsubject={Droit constitutionnel camerounais}}
 \setlength{\parindent}{0pt}
 \setlength{\parskip}{5pt}
 \setlist[itemize]{leftmargin=1.4em,itemsep=2pt,topsep=3pt}
-\setlist[enumerate]{leftmargin=1.7em,itemsep=2pt,topsep=3pt}
-\renewcommand{\arraystretch}{1.18}
+\setlist[enumerate]{leftmargin=1.9em,itemsep=2pt,topsep=3pt}
+\renewcommand{\arraystretch}{1.25}
 
-\titleformat{\chapter}[display]
-  {\normalfont\sffamily\bfseries\color{navy}}
-  {\filleft\Large\chaptertitlename\ \thechapter}
-  {8pt}{\Huge\filright}
-  [\vspace{6pt}\color{gold}\titlerule]
-\titleformat{\section}
-  {\normalfont\sffamily\Large\bfseries\color{blue}}
-  {\thesection}{0.65em}{}
-\titleformat{\subsection}
-  {\normalfont\sffamily\large\bfseries\color{navy}}
-  {\thesubsection}{0.6em}{}
-\titlespacing*{\chapter}{0pt}{-10pt}{22pt}
-\titlespacing*{\section}{0pt}{18pt}{7pt}
-\titlespacing*{\subsection}{0pt}{12pt}{5pt}
+\newcommand{\src}[1]{\textcolor{bluec}{\scriptsize[#1]}}
+\newtcolorbox{keybox}[1][]{enhanced,breakable,colback=paleblue,colframe=bluec,boxrule=.6pt,arc=2pt,fonttitle=\bfseries\color{navy},#1}
+\newtcolorbox{warnbox}[1][]{enhanced,breakable,colback=palered,colframe=redc,boxrule=.6pt,arc=2pt,fonttitle=\bfseries\color{redc},#1}
+\newtcolorbox{methodbox}[1][]{enhanced,breakable,colback=palegold,colframe=gold,boxrule=.6pt,arc=2pt,fonttitle=\bfseries\color{navy},#1}
+\newtcolorbox{defbox}[1][]{enhanced,breakable,colback=palegrey,colframe=greenc,boxrule=.6pt,arc=2pt,fonttitle=\bfseries\color{greenc},#1}
+
+\titleformat{\chapter}[display]{\normalfont\sffamily\bfseries\color{navy}}{\filleft\large\chaptertitlename\ \thechapter}{6pt}{\Huge\filright}[\vspace{5pt}{\color{gold}\titlerule[1.2pt]}]
+\titlespacing*{\chapter}{0pt}{-12pt}{20pt}
+\titleformat{\section}{\normalfont\sffamily\Large\bfseries\color{bluec}}{\thesection}{.6em}{}
+\titleformat{\subsection}{\normalfont\sffamily\large\bfseries\color{navy}}{\thesubsection}{.6em}{}
 
 \pagestyle{fancy}
 \fancyhf{}
-\fancyhead[L]{\sffamily\small\color{muted}Préparation EIP · Institutions du Cameroun}
-\fancyhead[R]{\sffamily\small\color{muted}\nouppercase{\leftmark}}
-\fancyfoot[L]{\sffamily\scriptsize\color{muted}Version juridique vérifiée au 17 septembre 2026}
-\fancyfoot[R]{\sffamily\scriptsize\color{navy}\thepage\ / \pageref{LastPage}}
+\fancyhead[L]{\sffamily\small Préparation EIP · Institutions du Cameroun}
+\fancyhead[R]{\sffamily\small\nouppercase{\leftmark}}
+\fancyfoot[L]{\sffamily\scriptsize Données arrêtées au 17 septembre 2026}
+\fancyfoot[R]{\sffamily\scriptsize\thepage\ / \pageref{LastPage}}
 \renewcommand{\chaptermark}[1]{\markboth{#1}{}}
-\renewcommand{\headrulewidth}{0.4pt}
-\renewcommand{\footrulewidth}{0.2pt}
-
-\newcommand{\src}[1]{\hyperlink{src:#1}{\textcolor{blue}{\scriptsize[#1]}}}
-\newcommand{\article}[1]{\textbf{Article #1}\,}
-\newcommand{\keyword}[1]{\textbf{\textcolor{navy}{#1}}}
-\newcommand{\badge}[1]{\tikz[baseline=(X.base)]\node[fill=navy!9,draw=navy!35,rounded corners=2pt,inner xsep=4pt,inner ysep=1.5pt](X){\sffamily\scriptsize\textcolor{navy}{#1}};}
-
-\newtcolorbox{keybox}[1][]{enhanced,breakable,colback=paleblue,colframe=blue!65!black,
-  boxrule=0.6pt,arc=2pt,left=8pt,right=8pt,top=7pt,bottom=7pt,title={\sffamily\bfseries\color{navy}À retenir},fonttitle=\sffamily,#1}
-\newtcolorbox{warningbox}[1][]{enhanced,breakable,colback=palered,colframe=redcmr!70!black,
-  boxrule=0.6pt,arc=2pt,left=8pt,right=8pt,top=7pt,bottom=7pt,title={\sffamily\bfseries\color{redcmr}Point de vigilance},fonttitle=\sffamily,#1}
-\newtcolorbox{methodbox}[1][]{enhanced,breakable,colback=palegold,colframe=gold!75!black,
-  boxrule=0.6pt,arc=2pt,left=8pt,right=8pt,top=7pt,bottom=7pt,title={\sffamily\bfseries\color{navy}Méthode concours},fonttitle=\sffamily,#1}
-\newtcolorbox{definitionbox}[1][]{enhanced,breakable,colback=pale,colframe=muted!65,
-  boxrule=0.5pt,arc=2pt,left=8pt,right=8pt,top=7pt,bottom=7pt,title={\sffamily\bfseries\color{navy}Définition},fonttitle=\sffamily,#1}
+\renewcommand{\headrulewidth}{.4pt}
 
 \begin{document}
-
-% ==================== COUVERTURE ====================
-\begin{titlepage}
-\begin{tikzpicture}[remember picture,overlay]
-  \fill[navy] (current page.north west) rectangle ([yshift=-8.3cm]current page.north east);
-  \fill[gold] ([yshift=-8.3cm]current page.north west) rectangle ([yshift=-8.5cm]current page.north east);
-  \fill[redcmr!90!black] ([xshift=-3.3cm]current page.south east) rectangle (current page.south east);
-  \draw[white,opacity=.14,line width=16pt] ([xshift=-2.1cm,yshift=3.3cm]current page.south east) circle (4.8cm);
-  \draw[gold,opacity=.65,line width=1.2pt] ([xshift=-2.1cm,yshift=3.3cm]current page.south east) circle (3.8cm);
-\end{tikzpicture}
-\vspace*{1.25cm}
-{\sffamily\small\color{white!75}\MakeUppercase{République du Cameroun}}\\[3pt]
-{\sffamily\small\color{white!75}\MakeUppercase{Paix — Travail — Patrie}}
+\begin{titlepage}\centering\vspace*{2.5cm}
+{\sffamily\large\color{navy}RÉPUBLIQUE DU CAMEROUN\\[2pt]Paix — Travail — Patrie}\\[1.4cm]
+{\color{gold}\rule{\textwidth}{2pt}}\\[.8cm]
+{\sffamily\bfseries\color{navy}\Huge Le Président de la République et le Parlement au Cameroun}\\[.9cm]
+{\color{gold}\rule{\textwidth}{2pt}}\\[1.2cm]
+{\sffamily\Large Cours complet de droit constitutionnel}\\[.5cm]
+{\sffamily\large Préparation au concours de la Police — Élève Inspecteur de Police (EIP)}
 \vfill
-{\sffamily\bfseries\color{white}\fontsize{28}{34}\selectfont LE PRÉSIDENT DE LA RÉPUBLIQUE\\[5pt]
-\fontsize{21}{27}\selectfont ET LE PARLEMENT DU CAMEROUN}
-\vspace{0.5cm}
-{\color{gold}\rule{5cm}{1.3pt}}\\[0.8cm]
-{\sffamily\large\color{white!90}Cours complet de droit constitutionnel\\[4pt]
-Préparation au concours de la Police — Élève Inspecteur de Police (EIP)}
-\vfill
-\begin{tcolorbox}[width=0.92\textwidth,colback=white!96,colframe=white!96,boxrule=0pt,arc=2pt]
-\sffamily\small\color{ink}
-\textbf{Édition de travail}\hfill\textbf{Mise à jour : 17 septembre 2026}\\[-1pt]
-Textes de référence : Constitution révisée en 1996, 2008 et 2026 · Code électoral · règlements intérieurs · sites institutionnels.
-\end{tcolorbox}
-\vspace*{0.8cm}
+{\sffamily\small Édition de travail — données arrêtées au 17 septembre 2026\\[3pt]
+Constitution du 2 juin 1972 révisée en 1996, 2008 et 2026 · Code électoral · Assemblée nationale · Sénat}
 \end{titlepage}
-
-\frontmatter
-\chapter*{Avertissement de fiabilité}
-\addcontentsline{toc}{chapter}{Avertissement de fiabilité}
-Ce document est un support de préparation, non une consultation juridique. La hiérarchie des sources est respectée : la Constitution et les lois priment sur les présentations pédagogiques des institutions. Les éléments variables (titulaires des fonctions, composition politique, actualités) sont datés. Pour un concours, il faut toujours vérifier la dernière version du Journal officiel, du site de la Présidence, de l'Assemblée nationale, du Sénat et d'Elections Cameroon.
-
-\begin{warningbox}
-\textbf{Réforme constitutionnelle à ne pas manquer.} La loi n°\,2026/002 du 14 avril 2026 a modifié les articles 5, 6, 7, 10, 53 et 66 de la Constitution. Elle a créé le poste de Vice-Président de la République et changé le mécanisme de vacance de la Présidence. Les anciennes fiches qui présentent exclusivement le Président du Sénat comme successeur intérimaire sont incomplètes : elles décrivent le droit antérieur, sauf dans l'hypothèse où le poste de Vice-Président n'est pas pourvu. \src{S2}
-\end{warningbox}
-
-\section*{Objectifs de l'EIP}
-À l'issue de l'étude, le candidat doit pouvoir :
-\begin{itemize}
-  \item citer les articles constitutionnels essentiels sans confondre le texte de 1996, la modification de 2008 et la réforme de 2026 ;
-  \item distinguer le Président de la République, le Gouvernement, l'Assemblée nationale, le Sénat et le Parlement ;
-  \item expliquer les pouvoirs du Chef de l'État, le bicamérisme, la navette législative et le contrôle parlementaire ;
-  \item traiter une question de cours ou un QCM en justifiant chaque réponse par une règle précise ;
-  \item appliquer ces connaissances au métier de police : légalité, hiérarchie des autorités, ordre public, sécurité et respect des libertés.
-\end{itemize}
-
 \tableofcontents
+\clearpage
+\chapter{Avertissement et mode d'emploi}
+Ce document est un \textbf{support de préparation} au concours d'Élève Inspecteur de Police (EIP). Il n'est pas une consultation juridique. Toutes les règles exposées sont tirées de la Constitution de la République du Cameroun et des lois qui la modifient, ainsi que du Code électoral et des présentations officielles des deux chambres du Parlement. Les sources sont listées en fin de document et rappelées par des repères du type \src{S1}.
 
-\mainmatter
+\begin{warnbox}[title={Point de vigilance — Distinguer trois choses}]
+1. \textbf{La règle constitutionnelle} : elle ne change qu'avec une révision. C'est elle qui est évaluée au concours.
 
-% ==================== FICHE EXPRESS ====================
+2. \textbf{La règle légale} (Code électoral, règlements intérieurs) : elle précise la Constitution.
+
+3. \textbf{L'actualité} (noms des titulaires, composition politique) : elle change vite. Dans ce document, toute donnée d'actualité est \textbf{datée}. Arrêtée au 17 septembre 2026.
+\end{warnbox}
+\begin{warnbox}[title={Point de vigilance — Réforme à ne pas manquer : la révision constitutionnelle de 2026}]
+Le Parlement réuni en Congrès a adopté le 4 avril 2026 une révision constitutionnelle promulguée le 14 avril 2026. Elle modifie les articles 5, 6, 7, 10, 53 et 66 et \textbf{crée le poste de Vice-Président de la République}, nommé par le Chef de l'État. Elle réorganise surtout la succession en cas de vacance de la Présidence. Les anciennes fiches qui présentent le Président du Sénat comme successeur automatique décrivent désormais un cas particulier et non plus le principe. \src{S3} \src{S4}
+\end{warnbox}
+\section{Ce que le candidat doit savoir faire}
+\begin{itemize}
+  \item citer les articles constitutionnels essentiels sans confondre le texte de 1996, la révision de 2008 et celle de 2026 ;
+  \item distinguer le Président de la République, le Vice-Président, le Gouvernement, l'Assemblée nationale, le Sénat et le Parlement ;
+  \item expliquer l'élection et les pouvoirs du Chef de l'État, le bicamérisme, la navette législative, la promulgation et le contrôle parlementaire ;
+  \item traiter une question de cours ou un QCM en justifiant chaque réponse par une règle précise ;
+  \item relier ces connaissances au métier de police : légalité, hiérarchie des autorités, ordre public, respect des libertés.
+\end{itemize}
 \chapter{Fiche express : les repères qui rapportent des points}
-
-\section{Les 20 réponses à savoir immédiatement}
-\begin{longtable}{>{\raggedright\arraybackslash}p{0.43\textwidth} >{\raggedright\arraybackslash}p{0.49\textwidth}}
+\section{Les vingt réponses à connaître par cœur}
+\begin{longtable}{>{\raggedright\arraybackslash}p{0.335\textwidth} >{\raggedright\arraybackslash}p{0.595\textwidth}}
 \toprule
-\textbf{Question} & \textbf{Réponse exacte}\
-\midrule
-\endhead
-Nature de l'État & État unitaire décentralisé, un et indivisible, laïque, démocratique et social (art. 1).\
-Chef de l'État & Le Président de la République.\
-Titulaire actuel & Paul BIYA, réélu en 2025 et investi le 6 novembre 2025 ; information datée. \src{S12}\
-Durée du mandat présidentiel & Sept ans ; le Président est rééligible (art. 6 modifié en 2008).\
-Mode d'élection du Président & Suffrage universel direct, égal et secret, à la majorité des suffrages exprimés.\
-Âge constitutionnel minimal du candidat présidentiel & Trente-cinq ans révolus ; les conditions complémentaires viennent du Code électoral.\
-Rôle central du Président & Chef de l'État, symbole de l'unité nationale, définition de la politique de la Nation, garant de la Constitution, de l'indépendance et de la continuité de l'État.\
-Vice-Président & Fonction créée par la loi n° 2026/002 ; nommé par le Président, pouvoirs sur délégation expresse.\
-Succession depuis 2026 & Le Vice-Président achève en principe le mandat en cas de vacance ; si le poste n'est pas pourvu ou si le Vice-Président est empêché, scrutin sous 20 à 120 jours et intérim par le Président du Sénat.\
-Parlement & Deux chambres : Assemblée nationale et Sénat.\
-Mission du Parlement & Voter la loi et contrôler l'action du Gouvernement.\
-Assemblée nationale & 180 députés, suffrage universel direct et secret, mandat de cinq ans.\
-Sénat & 100 sénateurs : 70 élus indirectement et 30 nommés par le Président ; 10 par région.\
-Âge minimal du sénateur & Quarante ans révolus (Constitution, art. 20 ; conditions complétées par la loi électorale).\
-Sessions ordinaires & Mars, juin et novembre ; au maximum 30 jours pour chaque session.\
-Sessions extraordinaires & Au maximum 15 jours, sur ordre du jour déterminé.\
-Congrès & Réunion des deux chambres, notamment pour messages du Président, serment des membres du Conseil constitutionnel et révision constitutionnelle.\
-Navette & L'Assemblée nationale adopte d'abord ; le Sénat examine dans les délais de l'article 30 ; en cas de désaccord, l'Assemblée peut statuer définitivement selon les règles prévues.\
-Promulgation & Le Président promulgue dans les 15 jours, sauf seconde lecture ou saisine du Conseil constitutionnel ; à défaut, le Président de l'Assemblée peut se substituer à lui.\
-Contrôle du Gouvernement & Questions, commissions d'enquête, question de confiance et motion de censure.\
+\textbf{\color{navy}Question} & \textbf{\color{navy}Réponse exacte} \\
+\midrule\endhead
+Nature de l'État & État unitaire décentralisé, un et indivisible, laïque, démocratique et social (art. 1er, al. 2). \\
+\addlinespace[1pt]
+Langues officielles & Le français et l'anglais, d'égale valeur (art. 1er, al. 3). \\
+\addlinespace[1pt]
+Siège des institutions & Yaoundé (art. 1er, al. 8). \\
+\addlinespace[1pt]
+Autorité de l'État & Exercée par le Président de la République et le Parlement (art. 4). \\
+\addlinespace[1pt]
+Chef de l'État & Le Président de la République (art. 5, al. 1). \\
+\addlinespace[1pt]
+Durée du mandat présidentiel & Sept ans ; le Président est rééligible (art. 6, al. 2, modifié en 2008). \\
+\addlinespace[1pt]
+Mode d'élection du Président & Suffrage universel direct, égal et secret, à la majorité des suffrages exprimés (art. 6, al. 1). \\
+\addlinespace[1pt]
+Âge minimal du candidat à la Présidence & Trente-cinq ans révolus à la date de l'élection, et être Camerounais d'origine. \\
+\addlinespace[1pt]
+Vice-Président & Fonction créée en 2026 : nommé et révoqué par le Président ; ses pouvoirs procèdent d'une délégation expresse. \\
+\addlinespace[1pt]
+Succession depuis 2026 & En cas de vacance, le Vice-Président achève le mandat. À défaut (poste non pourvu ou Vice-Président empêché) : scrutin dans 20 à 120 jours, intérim par le Président du Sénat. \\
+\addlinespace[1pt]
+Composition du Parlement & Deux chambres : l'Assemblée nationale et le Sénat (art. 14, al. 1). \\
+\addlinespace[1pt]
+Missions du Parlement & Légiférer et contrôler l'action du Gouvernement (art. 14, al. 2). \\
+\addlinespace[1pt]
+Assemblée nationale & 180 députés, suffrage universel direct et secret, mandat de cinq ans (art. 15). \\
+\addlinespace[1pt]
+Sénat & 100 sénateurs : 10 par région, dont 7 élus au suffrage indirect et 3 nommés par le Président (art. 20). \\
+\addlinespace[1pt]
+Âge minimal du sénateur & Quarante ans révolus à la date de l'élection ou de la nomination (art. 20, al. 3). \\
+\addlinespace[1pt]
+Sessions ordinaires & Trois par an, en mars, juin et novembre ; trente jours au maximum chacune. \\
+\addlinespace[1pt]
+Sessions extraordinaires & Quinze jours au maximum, sur un ordre du jour déterminé. \\
+\addlinespace[1pt]
+Congrès & Les deux chambres réunies : message du Président, serment des membres du Conseil constitutionnel, révision de la Constitution (art. 14, al. 4). \\
+\addlinespace[1pt]
+Délai de promulgation & Quinze jours à compter de la transmission, sauf seconde lecture ou saisine du Conseil constitutionnel (art. 31). \\
+\addlinespace[1pt]
+Motion de censure & Signée par au moins un tiers des députés ; adoptée à la majorité des deux tiers des membres composant l'Assemblée (art. 34, al. 3). \\
+\addlinespace[1pt]
 \bottomrule
 \end{longtable}
+\begin{keybox}[title={À retenir — Deux formules-mémoire}]
+\textbf{Président : 5 – 6 – 7 – 8 – 9 – 10.} Article 5 (statut), 6 (élection et vacance), 7 (serment), 8 (attributions), 9 (état d'urgence et état d'exception), 10 (nominations et délégations).
 
-\begin{keybox}
-\textbf{Formule-mémoire :} \emph{5–6–7–8–9–10} pour le Président : article 5 (statut), 6 (élection et vacance), 7 (serment), 8 (attributions), 9 (crises), 10 (Gouvernement et délégation). \quad \textbf{14–15–20–25–26–30–34–35} pour le Parlement : structure, Assemblée, Sénat, initiative, domaine de la loi, navette, responsabilité du Gouvernement, contrôle.
+\textbf{Parlement : 14 – 15 – 20 – 25 – 26 – 30 – 31 – 34 – 35.} Structure, Assemblée nationale, Sénat, initiative des lois, domaine de la loi, navette, promulgation, responsabilité du Gouvernement, contrôle parlementaire.
 \end{keybox}
-
-\section{Les pièges classiques}
+\section{Les sept pièges classiques}
 \begin{enumerate}
-  \item \textbf{« Le Président est élu pour sept ans renouvelable une fois » : faux dans le droit actuel.} La loi de 2008 a supprimé la limitation « renouvelable une fois » : il est rééligible. \src{S1}
-  \item \textbf{« Le Parlement ne comprend que l'Assemblée nationale » : faux.} Depuis la mise en place du Sénat en 2013, il est bicaméral.
-  \item \textbf{« Les sénateurs sont élus directement par tous les citoyens » : faux.} Les 70 sénateurs élus le sont au suffrage universel indirect sur une base régionale.
-  \item \textbf{« Le Président du Sénat est toujours le successeur » : incomplet depuis 2026.} Il intervient si le poste de Vice-Président n'est pas pourvu ou si celui-ci est empêché, selon l'article 6 révisé.
+  \item \textbf{« Le Président est élu pour sept ans renouvelable une fois » : faux aujourd'hui.} La loi n° 2008/001 du 14 avril 2008 a supprimé cette limitation ; le texte dit désormais « Il est rééligible ». \src{S2} \src{S4}
+  \item \textbf{« Le Parlement, c'est l'Assemblée nationale » : faux.} Le Parlement est bicaméral ; le Sénat a été installé en 2013.
+  \item \textbf{« Les sénateurs sont élus par tous les citoyens » : faux.} Sur dix sénateurs par région, sept sont élus au suffrage universel \textbf{indirect} et trois sont \textbf{nommés} par le Président.
+  \item \textbf{« Le Président du Sénat est le successeur du Chef de l'État » : incomplet depuis 2026.} Il n'assure l'intérim que si le poste de Vice-Président n'est pas pourvu ou si le Vice-Président est lui-même empêché.
   \item \textbf{« Le Premier ministre est le Chef de l'État » : faux.} Il est le Chef du Gouvernement et dirige son action (art. 12).
-  \item \textbf{« Une loi est seulement votée par l'Assemblée nationale » : faux en régime bicaméral.} Le Parlement vote la loi et le Sénat participe à la navette.
-  \item \textbf{« Le vote présidentiel se fait à deux tours » : faux selon le Code électoral consulté.} Le scrutin est uninominal majoritaire à un tour ; est élu le candidat qui obtient la majorité des suffrages exprimés. \src{S6}
+  \item \textbf{« Le Président vote les lois » : faux.} Le Parlement vote la loi ; le Président la promulgue, peut demander une seconde lecture et peut saisir le Conseil constitutionnel.
+  \item \textbf{« L'élection présidentielle se joue à deux tours » : faux.} Le scrutin est uninominal majoritaire \textbf{à un tour} : est élu le candidat qui obtient la majorité des suffrages exprimés. \src{S6}
 \end{enumerate}
-
-% ==================== CHAP 1 ====================
 \chapter{Le cadre constitutionnel camerounais}
-
 \section{La Constitution, norme suprême}
-La Constitution est la loi fondamentale de l'État. Elle organise les pouvoirs publics, fixe leurs compétences et garantit les droits et libertés. Le texte de base est la Constitution du 2 juin 1972, révisée en profondeur par la loi n°\,96/06 du 18 janvier 1996, puis modifiée par la loi n°\,2008/001 du 14 avril 2008 et par la loi n°\,2026/002 du 14 avril 2026. Le candidat doit donc parler de la \keyword{Constitution en vigueur}, et non d'une « Constitution de 1996 » isolée de ses modifications. \src{S1}\src{S2}
+La Constitution est la loi fondamentale de l'État : elle organise les pouvoirs publics, fixe leurs compétences et garantit les droits et libertés. Le texte de base est la Constitution du 2 juin 1972, révisée en profondeur par la \textbf{loi n° 96/06 du 18 janvier 1996}, puis modifiée par la \textbf{loi n° 2008/001 du 14 avril 2008} et par la \textbf{révision promulguée le 14 avril 2026}. Il faut donc parler de la Constitution \textbf{en vigueur}, et non d'une « Constitution de 1996 » détachée de ses modifications. \src{S1} \src{S2} \src{S3}
 
-Le préambule fait partie intégrante de la Constitution (art. 65). Il proclame notamment l'égalité en droits et en devoirs, la protection des minorités et des populations autochtones, la liberté et la sécurité, la présomption d'innocence, l'interdiction de la torture, la laïcité, les libertés de communication, d'expression, de presse, de réunion et d'association, le droit à l'instruction, le droit de propriété, le droit à un environnement sain et le devoir de contribuer aux charges publiques et à la défense de la patrie.
+Le préambule fait partie intégrante de la Constitution (art. 65). Il proclame notamment l'égalité en droits et en devoirs, la protection des minorités et des populations autochtones, la liberté et la sécurité individuelles, l'inviolabilité du domicile et du secret des correspondances, la non-rétroactivité de la loi, la présomption d'innocence, l'interdiction de la torture et des traitements cruels, inhumains ou dégradants, la laïcité de l'État, les libertés de communication, d'expression, de presse, de réunion, d'association et le droit de grève, le droit à l'instruction, le droit de propriété, le droit à un environnement sain, ainsi que le devoir de contribuer aux charges publiques et à la défense de la patrie.
 
+\begin{defbox}[title={Définition — Trois notions à ne pas confondre}]
+\textbf{Constitution} : norme suprême, révisable selon la procédure des articles 63 et 64.
+
+\textbf{Loi} : texte voté par le Parlement dans les matières de l'article 26.
+
+\textbf{Règlement} : acte de l'exécutif dans toutes les matières qui ne relèvent pas de la loi (art. 27).
+\end{defbox}
 \section{Les principes de l'État}
 \begin{itemize}
-  \item \textbf{Unitaire :} l'État ne se compose pas d'États fédérés ; l'autorité constitutionnelle est unique.
-  \item \textbf{Décentralisé :} les régions et les communes sont des collectivités territoriales décentralisées, dotées de l'autonomie administrative et financière dans les conditions de la loi.
-  \item \textbf{Un et indivisible :} l'unité du territoire et de la Nation est protégée.
-  \item \textbf{Laïque :} l'État est neutre et indépendant à l'égard des religions ; la liberté de culte est garantie.
-  \item \textbf{Démocratique et social :} la souveraineté nationale appartient au peuple, qui l'exerce par le Président, les membres du Parlement ou le référendum (art. 2).
-  \item \textbf{Bilingue :} le français et l'anglais sont les langues officielles d'égale valeur ; l'État promeut le bilinguisme et les langues nationales.
+  \item \textbf{Unitaire} : il n'existe pas d'États fédérés ; l'autorité constitutionnelle est unique.
+  \item \textbf{Décentralisé} : les régions et les communes sont des collectivités territoriales décentralisées, personnes morales de droit public dotées de l'autonomie administrative et financière (art. 55).
+  \item \textbf{Un et indivisible} : l'unité du territoire et de la Nation est protégée ; aucune révision ne peut y porter atteinte (art. 64).
+  \item \textbf{Laïque} : l'État est neutre et indépendant à l'égard de toutes les religions ; la liberté de culte est garantie.
+  \item \textbf{Démocratique et social} : la souveraineté nationale appartient au peuple, qui l'exerce par l'intermédiaire du Président de la République et des membres du Parlement, ou par voie de référendum (art. 2, al. 1).
+  \item \textbf{Bilingue} : le français et l'anglais ont le même statut ; l'État garantit la promotion du bilinguisme et œuvre à la protection des langues nationales.
 \end{itemize}
+\section{La souveraineté, le vote et les partis}
+Les autorités chargées de diriger l'État tiennent leurs pouvoirs du peuple par voie d'élections au suffrage universel direct ou indirect, sauf disposition contraire de la Constitution (art. 2, al. 2). Le vote est \textbf{égal et secret} ; y participent tous les citoyens âgés d'au moins \textbf{vingt ans} (art. 2, al. 3). Les partis et formations politiques concourent à l'expression du suffrage ; ils doivent respecter les principes de la démocratie, de la souveraineté et de l'unité nationales (art. 3).
 
-\section{La souveraineté et le vote}
-Les autorités chargées de diriger l'État tiennent leurs pouvoirs du peuple par des élections au suffrage universel direct ou indirect, sauf dispositions contraires de la Constitution. Le vote est égal et secret ; l'article 2 de la Constitution fixe à vingt ans l'âge constitutionnel de participation au vote. Les partis concourent à l'expression du suffrage et doivent respecter la démocratie, la souveraineté et l'unité nationales.
+\begin{defbox}[title={Définition — Suffrage direct et suffrage indirect}]
+\textbf{Direct} : l'électeur désigne lui-même le titulaire du mandat (Président de la République, député).
 
-\begin{definitionbox}
-\textbf{Suffrage direct :} l'électeur choisit directement le titulaire du mandat, comme pour le Président de la République ou le député. \quad \textbf{Suffrage indirect :} l'électeur choisit des grands électeurs qui élisent à leur tour, comme pour les 70 sénateurs élus.
-\end{definitionbox}
+\textbf{Indirect} : l'électeur désigne des grands électeurs qui élisent à leur tour (les 70 sénateurs élus le sont par les conseillers régionaux et municipaux).
+\end{defbox}
+\section{La carte des institutions}
+L'article 4 énonce que l'autorité de l'État est exercée par le Président de la République et par le Parlement. La Constitution organise ensuite le pouvoir exécutif (titre II), le pouvoir législatif (titre III), les rapports entre eux (titre IV), le pouvoir judiciaire (titre V), les traités (titre VI), le Conseil constitutionnel (titre VII), la Haute Cour de justice (titre VIII), le Conseil économique et social (titre IX) et les collectivités territoriales décentralisées (titre X).
 
-\section{Les institutions à connaître}
-La Constitution distingue notamment le Président et le Gouvernement au titre du pouvoir exécutif, le Parlement au titre du pouvoir législatif, le pouvoir judiciaire, le Conseil constitutionnel, la Haute Cour de justice, le Conseil économique et social et les collectivités territoriales décentralisées. Pour l'EIP, cette architecture permet de comprendre qui décide, qui exécute, qui contrôle et qui juge.
-
-\begin{methodbox}
-Dans une réponse, commencer par la base juridique : « Selon l'article … de la Constitution… ». Ensuite seulement expliquer la portée pratique. Cette méthode évite les réponses politiques ou journalistiques qui ne répondent pas à la question de droit.
-\end{methodbox}
-
-% ==================== CHAP 2 ====================
-\chapter{Le Président de la République}
-
-\section{Statut et rôle constitutionnel}
-L'article 5 fait du Président de la République le \keyword{Chef de l'État}. Élu de la Nation tout entière, il incarne l'unité nationale. Il définit la politique de la Nation, veille au respect de la Constitution, assure par son arbitrage le fonctionnement régulier des pouvoirs publics et garantit l'indépendance nationale, l'intégrité du territoire, la permanence et la continuité de l'État ainsi que le respect des traités et accords internationaux. \src{S1}\src{S11}
-
-Cette position fait du Président la clé de voûte de l'exécutif camerounais, sans pour autant supprimer les compétences constitutionnelles du Parlement, du Gouvernement, du Conseil constitutionnel et du pouvoir judiciaire. Le Président n'est pas le Gouvernement : le Gouvernement met en œuvre la politique définie par le Président et est responsable devant l'Assemblée nationale dans les conditions de la Constitution.
-
-Depuis la loi n°\,2026/002, l'article 5 prévoit que le Président \emph{peut être assisté d'un Vice-Président}. Il s'agit d'une fonction constitutionnelle nouvelle dans le dispositif actuel : elle ne transforme pas le Vice-Président en Chef de l'État élu séparément et ne retire pas au Président sa qualité de Chef des Forces armées.
-
-\section{Élection, mandat et entrée en fonction}
-\subsection{Règles constitutionnelles}
-L'article 6 prévoit que le Président est élu au suffrage universel direct, égal et secret, à la majorité des suffrages exprimés. Son mandat est de sept ans et il est rééligible. L'élection a lieu vingt jours au moins et cinquante jours au plus avant l'expiration des pouvoirs du Président en exercice.
-
-Les conditions constitutionnelles de candidature sont : être citoyen camerounais d'origine, jouir de ses droits civiques et politiques et avoir trente-cinq ans révolus à la date de l'élection. La loi électorale ajoute les conditions de procédure et de dossier : notamment la plénitude des droits civiques et politiques, la résidence continue au Cameroun pendant douze mois et l'inscription sur les listes électorales ; les candidatures indépendantes doivent être présentées par 300 personnalités originaires de toutes les régions, à raison de 30 par région, dans les conditions prévues par le Code électoral. \src{S6}
-
-\subsection{Prestation de serment}
-Le Président élu entre en fonction dès sa prestation de serment. Il prête serment devant le peuple camerounais, en présence des membres du Parlement, du Conseil constitutionnel et de la Cour suprême réunis en séance solennelle. Le serment est reçu par le Président de l'Assemblée nationale. Les fonctions présidentielles sont incompatibles avec toute autre fonction publique élective ou toute activité professionnelle. (Art. 7.)
-
-\subsection{Repère d'actualité}
-À la date de cette édition, le Président de la République est Son Excellence Paul BIYA. La Présidence indique qu'il exerce la fonction depuis le 6 novembre 1982 ; après sa réélection en 2025, il a prêté serment le 6 novembre 2025 devant le Parlement réuni en séance solennelle. Ce nom est une donnée d'actualité, à distinguer des règles constitutionnelles qui demeurent la matière principale du concours. \src{S12}
-
-\section{Les attributions du Président : article 8}
-\begin{enumerate}
-  \item \textbf{Représentation de l'État :} le Président représente l'État dans tous les actes de la vie publique.
-  \item \textbf{Défense et sécurité :} il est le Chef des Forces armées et veille à la sécurité intérieure et extérieure de la République. Cette règle n'autorise pas un agent à agir hors la loi : les forces de sécurité restent soumises à la Constitution, aux lois et aux règlements.
-  \item \textbf{Diplomatie :} il accrédite les ambassadeurs et envoyés extraordinaires ; les représentants étrangers sont accrédités auprès de lui.
-  \item \textbf{Promulgation :} il promulgue les lois dans les conditions de l'article 31.
-  \item \textbf{Contrôle constitutionnel :} il peut saisir le Conseil constitutionnel dans les conditions prévues par la Constitution.
-  \item \textbf{Grâce :} il exerce le droit de grâce après avis du Conseil supérieur de la magistrature. La grâce ne doit pas être confondue avec l'amnistie, qui relève du domaine de la loi.
-  \item \textbf{Pouvoir réglementaire :} il exerce le pouvoir réglementaire, c'est-à-dire le pouvoir de prendre les actes nécessaires dans les matières qui ne relèvent pas du domaine de la loi.
-  \item \textbf{Organisation administrative :} il crée et organise les services publics de l'État.
-  \item \textbf{Nominations :} il nomme aux emplois civils et militaires de l'État et confère les décorations et distinctions honorifiques.
-  \item \textbf{Dissolution :} en cas de nécessité, après consultation du Gouvernement et des bureaux de l'Assemblée nationale et du Sénat, il peut prononcer la dissolution de l'Assemblée nationale. L'élection d'une nouvelle Assemblée obéit à l'article 15, alinéa 4.
-\end{enumerate}
-
-\begin{keybox}
-\textbf{À ne pas dire :} « Le Président vote toutes les lois ». \quad \textbf{À dire :} le Parlement vote la loi ; le Président la promulgue, peut demander une seconde lecture et peut saisir le Conseil constitutionnel.
-\end{keybox}
-
-\section{Les situations de crise : article 9}
-\subsection{État d'urgence}
-Lorsque les circonstances l'exigent, le Président peut proclamer par décret l'état d'urgence. Il dispose alors de pouvoirs spéciaux dans les conditions fixées par la loi. Le candidat doit retenir les trois éléments : décret présidentiel, circonstances exigeantes, pouvoirs spéciaux encadrés par la loi.
-
-\subsection{État d'exception}
-En cas de péril grave menaçant l'intégrité du territoire, la vie, l'indépendance ou les institutions de la République, le Président peut proclamer par décret l'état d'exception et prendre toutes les mesures qu'il juge nécessaires. Il en informe la Nation par message. L'état d'exception est donc une réponse constitutionnelle à une menace d'une gravité particulière ; il ne dispense pas les autorités du respect des normes supérieures et des droits garantis.
-
-\section{Le Président, le Vice-Président et le Gouvernement}
-\subsection{Nomination et fonctionnement du Gouvernement}
-Selon l'article 10 révisé en 2026, le Président nomme le Vice-Président, le Premier ministre et, sur proposition de ce dernier, les autres membres du Gouvernement. Il fixe leurs attributions, met fin à leurs fonctions et préside les conseils ministériels. Le Vice-Président n'est donc pas élu avec le Président : sa nomination relève du Président de la République.
-
-Le Président peut déléguer certains de ses pouvoirs au Vice-Président, au Premier ministre, aux autres membres du Gouvernement et à certains hauts responsables de l'administration, dans le cadre de leurs attributions respectives. En cas d'empêchement temporaire, il peut charger le Vice-Président, le Premier ministre ou, si nécessaire, un autre membre du Gouvernement d'assurer certaines fonctions, dans le cadre d'une délégation expresse.
-
-\subsection{Rôle du Gouvernement et du Premier ministre}
-Le Gouvernement met en œuvre la politique de la Nation telle que définie par le Président et est responsable devant l'Assemblée nationale (art. 11). Le Premier ministre est le Chef du Gouvernement ; il dirige son action, exécute les lois, exerce le pouvoir réglementaire sous réserve des prérogatives présidentielles, nomme à certains emplois civils et dirige les services administratifs nécessaires à sa mission (art. 12). Les fonctions gouvernementales sont incompatibles avec un mandat parlementaire et avec les autres activités ou fonctions énumérées par l'article 13.
-
-\section{Vacance de la Présidence : le droit applicable en 2026}
-La loi n°\,2026/002 a profondément réorganisé la succession. Il faut raisonner en deux scénarios.
-
-\begin{longtable}{>{\raggedright\arraybackslash}p{0.28\textwidth} >{\raggedright\arraybackslash}p{0.64\textwidth}}
+\begin{longtable}{>{\raggedright\arraybackslash}p{0.279\textwidth} >{\raggedright\arraybackslash}p{0.428\textwidth} >{\raggedright\arraybackslash}p{0.223\textwidth}}
 \toprule
-\textbf{Situation} & \textbf{Mécanisme}\
-\midrule
-\endhead
-Vacance par décès, démission ou empêchement définitif constaté par le Conseil constitutionnel & Si un Vice-Président est en fonctions, il achève le mandat du Président après avoir prêté serment selon les formes légales.\
-Vice-Président empêché ou poste non pourvu & Un scrutin présidentiel est organisé vingt jours au moins et cent vingt jours au plus après l'ouverture de la vacance. L'intérim est exercé de plein droit par le Président du Sénat ; s'il est empêché, par son suppléant suivant l'ordre de préséance du Sénat.\
-Limites de l'intérim & L'intérimaire ne peut modifier la Constitution ni la composition du Gouvernement, ne peut recourir au référendum et ne peut être candidat à l'élection organisée pour la Présidence. Une exception permet, si l'organisation de l'élection l'exige, de modifier la composition du Gouvernement après consultation du Conseil constitutionnel.\
+\textbf{\color{navy}Institution} & \textbf{\color{navy}Fonction} & \textbf{\color{navy}Articles} \\
+\midrule\endhead
+Président de la République & Chef de l'État, clé de voûte de l'exécutif & 5 à 10 \\
+\addlinespace[1pt]
+Vice-Président & Assiste le Président ; achève le mandat en cas de vacance & 5, 6, 7, 10 (révision 2026) \\
+\addlinespace[1pt]
+Gouvernement / Premier ministre & Met en œuvre la politique de la Nation & 11 à 13 \\
+\addlinespace[1pt]
+Assemblée nationale & Représente la Nation ; vote la loi et le budget & 15 à 19 \\
+\addlinespace[1pt]
+Sénat & Représente les collectivités territoriales décentralisées & 20 à 24 \\
+\addlinespace[1pt]
+Pouvoir judiciaire & Cour suprême, cours d'appel, tribunaux & 37 à 42 \\
+\addlinespace[1pt]
+Conseil constitutionnel & Constitutionnalité, régulation, élections & 46 à 52 \\
+\addlinespace[1pt]
+Haute Cour de justice & Haute trahison, complot contre la sûreté de l'État & 53 \\
+\addlinespace[1pt]
+Conseil économique et social & Organe consultatif & 54 \\
+\addlinespace[1pt]
+Régions et communes & Collectivités territoriales décentralisées & 55 à 62 \\
+\addlinespace[1pt]
 \bottomrule
 \end{longtable}
-\src{S2}
+\begin{methodbox}[title={Méthode concours — Réflexe de copie}]
+Commencer par la base juridique : « Selon l'article … de la Constitution… », puis seulement expliquer la portée pratique. Une réponse politique ou journalistique ne répond pas à une question de droit.
+\end{methodbox}
+\chapter{Le Président de la République}
+\section{Statut et rôle constitutionnel (article 5)}
+Le Président de la République est le \textbf{Chef de l'État}. Élu de la Nation tout entière, il incarne l'unité nationale. Il \textbf{définit la politique de la Nation}, veille au respect de la Constitution et assure, par son arbitrage, le fonctionnement régulier des pouvoirs publics. Il est le \textbf{garant} de l'indépendance nationale, de l'intégrité du territoire, de la permanence et de la continuité de l'État, ainsi que du respect des traités et accords internationaux. \src{S1} \src{S8}
 
-\begin{warningbox}
-\textbf{Ne pas inventer de Vice-Président.} La réforme crée une fonction et donne au Président le pouvoir de la pourvoir ; elle ne vaut pas, à elle seule, preuve qu'une personne déterminée a été nommée. Au 17 septembre 2026, les sources publiques consultées ne signalent pas de nomination officielle : ne retenir un nom qu'après publication d'un acte présidentiel authentique. \src{S15}
-\end{warningbox}
+Depuis la révision de 2026, l'article 5 ajoute que le Président \textbf{peut être assisté d'un Vice-Président}. Cette assistance ne retire au Chef de l'État aucune de ses prérogatives : il demeure notamment Chef des Forces armées. \src{S4}
 
-\section{Responsabilité, Haute Cour et déclaration des biens}
-La Haute Cour de justice juge les actes accomplis dans l'exercice de leurs fonctions par le Président en cas de haute trahison et, depuis la réforme de 2026, par le Vice-Président, le Premier ministre, les autres membres du Gouvernement et assimilés ainsi que certains hauts responsables en cas de complot contre la sûreté de l'État. La mise en accusation du Président exige un vote identique de l'Assemblée nationale et du Sénat, au scrutin public, à la majorité des quatre cinquièmes de leurs membres (art. 53).
+Cette position fait du Président la clé de voûte de l'exécutif, sans supprimer les compétences propres du Parlement, du Gouvernement, du Conseil constitutionnel et du pouvoir judiciaire. Le Président n'est pas le Gouvernement : le Gouvernement \textbf{met en œuvre} la politique que le Président \textbf{définit}, et il est responsable devant l'Assemblée nationale.
 
-Les actes accomplis par le Président en application des articles 5, 8, 9 et 10 sont couverts par une immunité et ne sauraient engager sa responsabilité à l'issue de ses fonctions, selon l'article 53. Il faut distinguer cette règle de la responsabilité politique du Gouvernement devant l'Assemblée nationale.
-
-L'article 66 impose une déclaration des biens et avoirs au début et à la fin du mandat ou de la fonction à plusieurs titulaires de hautes fonctions : Président, Vice-Président, Premier ministre, membres du Gouvernement et assimilés, bureaux des chambres, députés, sénateurs et autres catégories prévues par la loi. \src{S2}
-
-\section{Le Président et le métier de police}
-Pour un inspecteur de police, connaître les pouvoirs présidentiels ne signifie pas exécuter un ordre manifestement contraire à la loi. Les principes opérationnels sont :
+\section{Élection, mandat et entrée en fonction (articles 6 et 7)}
+\subsection{Les règles constitutionnelles}
 \begin{itemize}
-  \item identifier l'autorité compétente et le texte qui fonde l'acte ;
-  \item distinguer le Chef de l'État, le Gouvernement, l'autorité administrative et l'autorité judiciaire ;
-  \item protéger la sécurité et l'ordre public sans méconnaître la dignité, la présomption d'innocence et les droits de la défense ;
-  \item comprendre qu'un état d'urgence ou d'exception repose sur un cadre constitutionnel et légal, et non sur une permission générale de tout faire ;
-  \item rédiger un compte rendu précis, factuel, daté et juridiquement qualifié.
+  \item \textbf{Mode de scrutin} : suffrage universel \textbf{direct, égal et secret}, à la majorité des suffrages exprimés (art. 6, al. 1). Le Code électoral en fait un scrutin uninominal majoritaire \textbf{à un tour}. \src{S6}
+  \item \textbf{Durée} : sept ans. Depuis 2008, le Président \textbf{est rééligible}, sans limitation du nombre de mandats (art. 6, al. 2).
+  \item \textbf{Date} : l'élection a lieu vingt jours au moins et cinquante jours au plus avant l'expiration des pouvoirs du Président en exercice (art. 6, al. 3).
+  \item \textbf{Conditions de candidature} : être citoyen camerounais \textbf{d'origine}, jouir de ses droits civiques et politiques et avoir \textbf{trente-cinq ans révolus} à la date de l'élection.
+  \item \textbf{Renvoi à la loi} : le régime de l'élection présidentielle est fixé par la loi, c'est-à-dire par le Code électoral.
 \end{itemize}
+Le Code électoral ajoute les conditions de dossier et de procédure : inscription sur une liste électorale, résidence continue sur le territoire national pendant au moins douze mois, investiture par un parti politique ou, pour une candidature indépendante, présentation par trois cents personnalités originaires de toutes les régions, à raison de trente par région, ainsi que le versement d'un cautionnement. \src{S6}
 
-% ==================== CHAP 3 ====================
-\chapter{Le Parlement du Cameroun}
+\subsection{Prestation de serment (article 7)}
+Le Président élu \textbf{entre en fonction dès sa prestation de serment}. Il prête serment devant le peuple camerounais, en présence des membres du Parlement, du Conseil constitutionnel et de la Cour suprême réunis en séance solennelle. Le serment est \textbf{reçu par le Président de l'Assemblée nationale}. Les fonctions de Président de la République — et, depuis 2026, celles de Vice-Président — sont incompatibles avec toute autre fonction publique élective et avec toute activité professionnelle.
 
-\section{Définition et missions}
-L'article 14 dispose que le pouvoir législatif est exercé par le Parlement, qui comprend deux chambres : l'Assemblée nationale et le Sénat. Le Parlement légifère et contrôle l'action du Gouvernement. Le bicamérisme signifie que deux chambres participent au travail législatif, avec des modes de représentation différents : la Nation pour l'Assemblée nationale, les collectivités territoriales décentralisées pour le Sénat.
+\subsection{Repère d'actualité (donnée datée)}
+À la date du 17 septembre 2026, le Président de la République est \textbf{Son Excellence Paul BIYA}, en fonction depuis le 6 novembre 1982 et investi pour un nouveau mandat après l'élection présidentielle de 2025. Ce nom est une donnée d'actualité : au concours, c'est la règle de l'article 6 qui est attendue, le nom ne venant qu'en illustration.
 
-\begin{definitionbox}
-\textbf{Parlement} = Assemblée nationale + Sénat. \quad \textbf{Gouvernement} = organe chargé de mettre en œuvre la politique de la Nation. \quad \textbf{Congrès} = réunion des deux chambres, dans les cas constitutionnels prévus.
-\end{definitionbox}
-
-\section{Règles communes aux deux chambres}
-\subsection{Sessions}
-Les chambres se réunissent aux mêmes dates en sessions ordinaires, chaque année en mars, juin et novembre, sur convocation de leurs bureaux après consultation du Président de la République. Elles peuvent se réunir en sessions extraordinaires à la demande du Président de la République ou du tiers des membres de la chambre concernée. Les deux chambres ne sont convoquées simultanément que si l'ordre du jour intéresse l'une et l'autre.
-
-Chaque chambre tient trois sessions ordinaires par an d'une durée maximale de trente jours. Une session extraordinaire ne dépasse pas quinze jours et se ferme dès que l'ordre du jour est épuisé. \src{S1}\src{S4}\src{S7}
-
-\subsection{Congrès}
-Les deux chambres peuvent se réunir en Congrès à la demande du Président de la République :
+\section{Les attributions du Président (article 8)}
 \begin{enumerate}
-  \item pour entendre une communication ou recevoir un message du Président ;
-  \item pour recevoir le serment des membres du Conseil constitutionnel ;
-  \item pour se prononcer sur un projet ou une proposition de révision constitutionnelle.
+  \item \textbf{Représentation} : il représente l'État dans tous les actes de la vie publique.
+  \item \textbf{Forces armées} : il est le Chef des Forces armées.
+  \item \textbf{Sécurité} : il veille à la sécurité intérieure et extérieure de la République.
+  \item \textbf{Diplomatie} : il accrédite les ambassadeurs et les envoyés extraordinaires auprès des puissances étrangères ; ceux des puissances étrangères sont accrédités auprès de lui.
+  \item \textbf{Promulgation} : il promulgue les lois dans les conditions de l'article 31.
+  \item \textbf{Saisine du Conseil constitutionnel} : il le saisit dans les conditions prévues par la Constitution.
+  \item \textbf{Droit de grâce} : il l'exerce après avis du Conseil supérieur de la magistrature.
+  \item \textbf{Pouvoir réglementaire} : il l'exerce dans les matières qui ne relèvent pas du domaine de la loi.
+  \item \textbf{Services publics} : il crée et organise les services publics de l'État.
+  \item \textbf{Nominations} : il nomme aux emplois civils et militaires de l'État.
+  \item \textbf{Décorations} : il confère les décorations et distinctions honorifiques de la République.
+  \item \textbf{Dissolution} : en cas de nécessité, après consultation du Gouvernement et des bureaux de l'Assemblée nationale et du Sénat, il peut prononcer la dissolution de l'Assemblée nationale ; l'élection d'une nouvelle Assemblée se fait alors selon l'article 15, alinéa 4.
 \end{enumerate}
-Lorsque le Parlement siège en Congrès, le bureau de l'Assemblée nationale préside les débats. Le Congrès n'est donc pas une troisième chambre permanente : c'est une formation exceptionnelle des deux chambres réunies.
+\begin{keybox}[title={À retenir — Grâce et amnistie}]
+La \textbf{grâce} est une mesure individuelle du Président qui dispense de tout ou partie de l'exécution d'une peine : la condamnation subsiste. L'\textbf{amnistie} efface l'infraction elle-même et relève du \textbf{domaine de la loi} (art. 26, al. 2, c, 6). Ne jamais les confondre.
+\end{keybox}
+\section{Les pouvoirs de crise (article 9)}
+\subsection{L'état d'urgence}
+Lorsque les circonstances l'exigent, le Président peut \textbf{proclamer par décret l'état d'urgence}, qui lui confère des pouvoirs spéciaux \textbf{dans les conditions fixées par la loi}. Trois éléments à retenir : un décret présidentiel, des circonstances qui l'exigent, des pouvoirs spéciaux encadrés par la loi.
 
-\subsection{Incompatibilités et statut}
-Nul ne peut appartenir à la fois à l'Assemblée nationale et au Sénat. La loi fixe le régime électoral des deux chambres ainsi que les immunités, inéligibilités, incompatibilités, indemnités et privilèges des parlementaires. Le candidat doit retenir le principe de non-cumul et savoir que le détail relève de la Constitution, du Code électoral et des règlements intérieurs.
+\subsection{L'état d'exception}
+En cas de \textbf{péril grave} menaçant l'intégrité du territoire, la vie, l'indépendance ou les institutions de la République, le Président peut \textbf{proclamer par décret l'état d'exception} et prendre toutes les mesures qu'il juge nécessaires. Il en \textbf{informe la Nation par voie de message}.
 
-% ==================== CHAP 4 ====================
-\chapter{L'Assemblée nationale}
+\begin{longtable}{>{\raggedright\arraybackslash}p{0.186\textwidth} >{\raggedright\arraybackslash}p{0.353\textwidth} >{\raggedright\arraybackslash}p{0.391\textwidth}}
+\toprule
+\textbf{\color{navy}Critère} & \textbf{\color{navy}État d'urgence} & \textbf{\color{navy}État d'exception} \\
+\midrule\endhead
+Fondement & Article 9, alinéa 1 & Article 9, alinéa 2 \\
+\addlinespace[1pt]
+Déclencheur & Les circonstances l'exigent & Péril grave pour le territoire, la vie, l'indépendance ou les institutions \\
+\addlinespace[1pt]
+Forme & Décret du Président & Décret du Président \\
+\addlinespace[1pt]
+Effet & Pouvoirs spéciaux dans les conditions fixées par la loi & Toutes mesures jugées nécessaires \\
+\addlinespace[1pt]
+Information & Non prévue par le texte & Message à la Nation \\
+\addlinespace[1pt]
+\bottomrule
+\end{longtable}
+\begin{warnbox}[title={Point de vigilance — Portée pour un policier}]
+Ni l'état d'urgence ni l'état d'exception ne suspendent l'obligation de légalité. Les forces de sécurité restent soumises à la Constitution, aux lois et aux règlements, et un ordre manifestement illégal n'est jamais couvert par le régime de crise.
+\end{warnbox}
+\section{Le Président, le Vice-Président et le Gouvernement (article 10)}
+\subsection{Nominations et délégations}
+Selon l'article 10 tel que révisé en 2026, le Président de la République \textbf{nomme le Vice-Président, le Premier ministre et, sur proposition de ce dernier, les autres membres du Gouvernement}. Il fixe leurs attributions, met fin à leurs fonctions et préside les conseils ministériels. Le Vice-Président n'est donc \textbf{pas élu} : il est nommé, et il peut être révoqué par le Président. La durée de ses fonctions ne peut excéder celle du mandat présidentiel en cours. \src{S3} \src{S4}
 
-\section{Composition, mandat et représentation}
-L'Assemblée nationale est composée de 180 députés élus au suffrage universel direct et secret pour un mandat de cinq ans. Le nombre peut être modifié par la loi. Chaque député représente l'ensemble de la Nation et tout mandat impératif est nul. En cas de crise grave ou lorsque les circonstances l'exigent, le Président peut, après consultations constitutionnelles, demander à l'Assemblée de décider par une loi de proroger ou d'abréger son mandat ; l'élection d'une nouvelle Assemblée intervient alors entre 40 et 120 jours après l'expiration du délai de prorogation ou d'abrègement. (Art. 15 modifié en 2008.)
+Le Président peut \textbf{déléguer certains de ses pouvoirs} au Vice-Président, au Premier ministre, aux autres membres du Gouvernement et à certains hauts responsables de l'administration, dans le cadre de leurs attributions respectives. En cas d'empêchement temporaire, il charge le Vice-Président, le Premier ministre ou, à défaut, un autre membre du Gouvernement d'assurer certaines de ses fonctions \textbf{dans le cadre d'une délégation expresse}.
 
-Le Code électoral prévoit qu'est éligible à l'Assemblée nationale le citoyen camerounais jouissant du droit de vote, inscrit sur une liste électorale, âgé de 23 ans révolus à la date du scrutin et sachant lire et écrire le français ou l'anglais, sous réserve des inéligibilités et incompatibilités légales. Le scrutin législatif est un scrutin de liste ou uninominal selon la circonscription, avec le système mixte prévu par le Code électoral. \src{S6}
-
-\subsection{Repères chiffrés de la 10\textsuperscript{e} législature}
-La page institutionnelle de l'Assemblée nationale présente 180 députés, dont 61 femmes et 119 hommes, répartis entre huit formations politiques : RDPC 152, UNDP 7, SDF 5, PCRN 5, UDC 4, FSNC 3, MDR 2 et UMS 2. Ces chiffres sont des données de législature, susceptibles d'évoluer en cas de vacance ou de modification légale ; ils ne remplacent pas la règle constitutionnelle des 180 sièges. \src{S17}
-
-\section{Fonctionnement}
-\subsection{Bureau}
-Au début de chaque législature et à l'ouverture de la première session ordinaire annuelle, l'Assemblée élit son Président et son bureau. La présentation institutionnelle du bureau comprend :
+\subsection{Le Gouvernement et le Premier ministre (articles 11 à 13)}
 \begin{itemize}
-  \item un Président ;
-  \item un premier Vice-Président ;
-  \item cinq Vice-Présidents ;
-  \item quatre Questeurs ;
-  \item douze Secrétaires ;
-  \item un Secrétaire général, membre de droit et conseiller juridique et parlementaire.
+  \item Le Gouvernement est chargé de la \textbf{mise en œuvre de la politique de la Nation telle que définie par le Président} ; il est responsable devant l'Assemblée nationale dans les conditions de l'article 34 (art. 11).
+  \item Le \textbf{Premier ministre est le Chef du Gouvernement} et dirige son action ; il est chargé de l'exécution des lois ; il exerce le pouvoir réglementaire et nomme aux emplois civils, sous réserve des prérogatives du Président ; il dirige les services administratifs nécessaires à sa mission et peut déléguer certains de ses pouvoirs (art. 12).
+  \item Les fonctions de membre du Gouvernement sont \textbf{incompatibles} avec tout mandat parlementaire, avec la présidence d'un exécutif ou d'une assemblée de collectivité territoriale décentralisée, avec toute fonction de représentation professionnelle à caractère national et avec tout emploi ou activité professionnelle (art. 13).
 \end{itemize}
-À la date de mise à jour, le site officiel de l'Assemblée nationale présente Théodore DATOUO comme Président de l'Assemblée nationale. Cette donnée est à distinguer de la composition constitutionnelle du bureau. \src{S4}\src{S13}
+\section{La vacance de la Présidence : le droit applicable depuis 2026}
+La révision de 2026 a réorganisé l'article 6. Il faut désormais raisonner en \textbf{deux scénarios}, et n'invoquer le Président du Sénat que dans le second.
 
-\subsection{Conférence des présidents}
-La Conférence des présidents comprend le Président de l'Assemblée, les membres du bureau, les présidents des neuf commissions générales et les présidents des groupes parlementaires. Un membre du Gouvernement participe à ses travaux. Elle prépare l'ordre du jour, statue sur la recevabilité des textes et les renvoie aux commissions compétentes ; elle fixe les dates des séances plénières.
+\begin{longtable}{>{\raggedright\arraybackslash}p{0.316\textwidth} >{\raggedright\arraybackslash}p{0.614\textwidth}}
+\toprule
+\textbf{\color{navy}Situation} & \textbf{\color{navy}Mécanisme applicable} \\
+\midrule\endhead
+Vacance par décès, démission ou empêchement définitif constaté par le Conseil constitutionnel, \textbf{un Vice-Président étant en fonctions} & Le Vice-Président \textbf{achève le mandat} du Président de la République. Il prête serment dès l'ouverture de la vacance, dans les termes et conditions fixés par la loi (art. 7, al. 4 nouveau). \\
+\addlinespace[1pt]
+\textbf{Vice-Président empêché ou poste non pourvu} & Un scrutin est organisé pour élire un nouveau Président \textbf{vingt jours au moins et cent vingt jours au plus} après l'ouverture de la vacance. L'intérim est exercé de plein droit par le \textbf{Président du Sénat} ou, s'il est empêché, par son suppléant suivant l'ordre de préséance du Sénat. \\
+\addlinespace[1pt]
+Limites de l'intérim & Le Président par intérim ne peut modifier ni la Constitution ni la composition du Gouvernement, ne peut recourir au référendum et \textbf{ne peut être candidat} à l'élection organisée. Exception : si l'organisation de l'élection l'exige, il peut modifier la composition du Gouvernement après consultation du Conseil constitutionnel. \\
+\addlinespace[1pt]
+\bottomrule
+\end{longtable}
+\begin{warnbox}[title={Point de vigilance — Ne jamais inventer de titulaire}]
+La révision de 2026 \textbf{crée} la fonction de Vice-Président et donne au Président le pouvoir de la pourvoir ; elle ne prouve pas à elle seule qu'une personne a été nommée. De faux décrets de nomination ont circulé en avril 2026 et ont été démentis. \src{S9} Ne retenir un nom qu'après publication d'un acte présidentiel authentique au Journal officiel.
+\end{warnbox}
+\section{Responsabilité, Haute Cour de justice et déclaration des biens}
+La \textbf{Haute Cour de justice} (art. 53) est compétente pour juger les actes accomplis dans l'exercice de leurs fonctions par le Président de la République \textbf{en cas de haute trahison}, et — depuis la révision de 2026 — par le \textbf{Vice-Président}, le Premier ministre, les autres membres du Gouvernement et assimilés, ainsi que les hauts responsables de l'administration ayant reçu délégation de pouvoirs en application des articles 10 et 12, \textbf{en cas de complot contre la sûreté de l'État}.
 
-\subsection{Sessions et séances}
-L'Assemblée siège de plein droit au début de chaque législature, puis tient chaque année trois sessions ordinaires de 30 jours maximum. Une session extraordinaire, sur ordre du jour déterminé, dure au maximum 15 jours et peut être demandée par le Président de la République ou par un tiers des députés. Les séances sont publiques ; le huis clos reste exceptionnel, à la demande du Gouvernement ou de la majorité absolue des membres. \src{S4}\src{S5}
+Le Président de la République ne peut être mis en accusation que par l'Assemblée nationale et le Sénat statuant \textbf{par un vote identique, au scrutin public, à la majorité des quatre cinquièmes} des membres les composant. Les actes accomplis par le Président en application des articles 5, 8, 9 et 10 sont couverts par l'immunité et ne sauraient engager sa responsabilité à l'issue de son mandat.
 
-\section{Les neuf commissions générales}
-Les commissions sont le lieu de l'étude technique des textes avant la séance plénière. Pour la 10\textsuperscript{e} législature, l'Assemblée nationale présente :
+L'article 66, complété en 2026, impose une \textbf{déclaration des biens et avoirs au début et à la fin du mandat ou de la fonction} au Président de la République, au Vice-Président, au Premier ministre, aux membres du Gouvernement et assimilés, aux membres des bureaux des deux chambres, aux députés et sénateurs, à tout détenteur d'un mandat électif, aux secrétaires généraux de ministères, aux directeurs d'administration centrale, aux directeurs généraux des entreprises publiques et parapubliques, aux magistrats et à tout gestionnaire de crédits et de biens publics.
+
+\begin{keybox}[title={À retenir — Deux responsabilités à distinguer}]
+\textbf{Responsabilité pénale devant la Haute Cour de justice} : elle vise le Président (haute trahison) et, depuis 2026, le Vice-Président et les membres du Gouvernement (complot contre la sûreté de l'État).
+
+\textbf{Responsabilité politique devant l'Assemblée nationale} : elle ne vise que le Gouvernement, par la question de confiance et la motion de censure (art. 34). Le Président, lui, n'est pas politiquement responsable devant le Parlement.
+\end{keybox}
+\section{Le Président de la République et le métier de police}
+\begin{itemize}
+  \item Le Chef de l'État veille à la sécurité intérieure et extérieure : la police participe à cette mission constitutionnelle, mais dans le cadre de la loi.
+  \item Savoir identifier l'autorité compétente et le texte qui fonde chaque acte : Chef de l'État, Gouvernement, autorité administrative (préfet, délégué du Gouvernement) ou autorité judiciaire.
+  \item Protéger l'ordre public sans méconnaître la dignité de la personne, la présomption d'innocence et les droits de la défense, garantis par le préambule.
+  \item Comprendre que l'état d'urgence et l'état d'exception reposent sur un cadre constitutionnel et légal, et non sur une permission générale.
+  \item Rédiger des actes et comptes rendus précis, datés, factuels et juridiquement qualifiés.
+\end{itemize}
+\chapter{Le Parlement : règles communes aux deux chambres}
+\section{Définition et missions (article 14)}
+Le \textbf{pouvoir législatif est exercé par le Parlement}, qui comprend deux chambres : l'Assemblée nationale et le Sénat. Le Parlement \textbf{légifère et contrôle l'action du Gouvernement}. Le bicamérisme signifie que deux chambres participent au travail législatif, avec des modes de représentation différents : la Nation pour l'Assemblée nationale, les collectivités territoriales décentralisées pour le Sénat.
+
+\begin{defbox}[title={Définition — Vocabulaire exact}]
+\textbf{Parlement} = Assemblée nationale + Sénat.
+
+\textbf{Gouvernement} = organe chargé de mettre en œuvre la politique de la Nation ; ce n'est pas une chambre.
+
+\textbf{Congrès} = réunion des deux chambres dans les cas limitativement prévus ; ce n'est pas une troisième chambre permanente.
+
+\textbf{Législature} = durée du mandat collectif de l'Assemblée nationale.
+\end{defbox}
+\section{Les sessions}
+Les chambres du Parlement se réunissent \textbf{aux mêmes dates} : en sessions ordinaires, chaque année aux mois de \textbf{mars, juin et novembre}, sur convocation des bureaux de l'Assemblée nationale et du Sénat après consultation du Président de la République ; en sessions extraordinaires, à la demande du Président de la République ou du tiers des membres composant l'une et l'autre chambres. Les deux chambres ne sont convoquées simultanément que si les matières portées à l'ordre du jour concernent l'une et l'autre (art. 14, al. 3, modifié en 2008).
+
+\begin{itemize}
+  \item Chaque chambre tient \textbf{trois sessions ordinaires par an}, de \textbf{trente jours au maximum} chacune (art. 16 et 21).
+  \item Une \textbf{session extraordinaire} dure \textbf{quinze jours au maximum}, se tient sur un \textbf{ordre du jour déterminé} et est close dès l'épuisement de cet ordre du jour.
+  \item Au début de chaque législature, chaque chambre se réunit \textbf{de plein droit} en session ordinaire, dans les conditions fixées par la loi.
+  \item À l'ouverture de sa première session ordinaire, chaque chambre \textbf{élit son président et son bureau}.
+\end{itemize}
+\section{Le Congrès (article 14, alinéa 4)}
+Les deux chambres peuvent se réunir en Congrès \textbf{à la demande du Président de la République} :
+
+\begin{enumerate}
+  \item pour entendre une communication ou recevoir un \textbf{message} du Président de la République ;
+  \item pour recevoir le \textbf{serment des membres du Conseil constitutionnel} ;
+  \item pour se prononcer sur un projet ou une proposition de \textbf{révision constitutionnelle}.
+\end{enumerate}
+Lorsque le Parlement se réunit en Congrès, c'est le \textbf{bureau de l'Assemblée nationale} qui préside les débats. C'est en Congrès qu'a été adoptée, le 4 avril 2026, la révision créant la Vice-Présidence. \src{S3}
+
+\section{Séances, ordre du jour et statut des parlementaires}
+\begin{itemize}
+  \item Les \textbf{séances sont publiques}. À la demande du Gouvernement ou de la majorité absolue de ses membres, une chambre peut exceptionnellement se réunir \textbf{à huis clos} (art. 17 et 22).
+  \item Chaque chambre fixe elle-même ses règles d'organisation et de fonctionnement sous forme de \textbf{loi portant règlement intérieur}, soumise au contrôle du Conseil constitutionnel avant mise en application.
+  \item L'\textbf{ordre du jour} est fixé par la \textbf{conférence des présidents}, qui comprend les présidents des groupes parlementaires, les présidents des commissions et les membres du bureau ; un membre du Gouvernement y participe (art. 18 et 23).
+  \item Sont \textbf{irrecevables} les propositions de loi et amendements qui entraîneraient une diminution des ressources publiques ou une aggravation des charges publiques sans compensation équivalente. En cas de doute, le Conseil constitutionnel tranche.
+  \item L'ordre du jour comporte \textbf{en priorité} les projets de loi et les propositions acceptées par le Gouvernement, dans l'ordre qu'il a fixé. L'\textbf{urgence est de droit} lorsque le Gouvernement la demande.
+  \item \textbf{Nul ne peut appartenir à la fois à l'Assemblée nationale et au Sénat} (art. 14, al. 5). La loi fixe le régime électoral des deux chambres ainsi que les immunités, inéligibilités, incompatibilités, indemnités et privilèges des parlementaires.
+\end{itemize}
+\chapter{L'Assemblée nationale}
+\section{Composition et mandat (article 15)}
+\begin{itemize}
+  \item \textbf{180 députés} élus au suffrage universel \textbf{direct et secret} pour un mandat de \textbf{cinq ans}. Le nombre de députés peut être modifié par la loi.
+  \item \textbf{Chaque député représente l'ensemble de la Nation} : il n'est pas le mandataire de sa seule circonscription.
+  \item \textbf{Tout mandat impératif est nul} : aucune instruction juridiquement contraignante ne peut lui être imposée.
+  \item En cas de crise grave ou lorsque les circonstances l'exigent, le Président de la République peut, après consultation du Président du Conseil constitutionnel et des bureaux des deux chambres, demander à l'Assemblée de décider \textbf{par une loi} de \textbf{proroger ou d'abréger son mandat}. L'élection d'une nouvelle Assemblée a lieu \textbf{quarante jours au moins et cent vingt jours au plus} après l'expiration du délai de prorogation ou d'abrègement (alinéa modifié en 2008).
+\end{itemize}
+Le Code électoral prévoit qu'est éligible à l'Assemblée nationale le citoyen camerounais jouissant du droit de vote, inscrit sur une liste électorale, âgé de \textbf{vingt-trois ans révolus} à la date du scrutin et sachant lire et écrire le français ou l'anglais, sous réserve des inéligibilités et incompatibilités légales. L'élection se fait au scrutin de liste dans les circonscriptions à plusieurs sièges et au scrutin uninominal majoritaire à un tour là où il n'y a qu'un siège à pourvoir. \src{S6}
+
+\begin{defbox}[title={Définition — Le système mixte des circonscriptions plurinominales}]
+Si une liste obtient la \textbf{majorité absolue} des suffrages exprimés, elle emporte \textbf{tous} les sièges. Sinon, la liste arrivée en tête reçoit la \textbf{moitié} des sièges (arrondie à l'entier supérieur) et l'autre moitié est répartie \textbf{à la proportionnelle} entre toutes les listes ayant franchi le seuil légal, y compris celle arrivée en tête. \src{S6}
+\end{defbox}
+\section{Organisation interne}
+\subsection{Le bureau}
+Au début de chaque législature, puis à l'ouverture de la première session ordinaire de chaque année, l'Assemblée nationale élit son Président et les membres de son bureau. La présentation officielle de l'Assemblée fait état d'un Président, d'un premier Vice-Président, de cinq Vice-Présidents, de quatre Questeurs et de douze Secrétaires, le Secrétaire général de l'Assemblée étant membre de droit et conseiller juridique et parlementaire. \src{S5}
+
+\subsection{La conférence des présidents}
+Elle réunit le Président de l'Assemblée, les membres du bureau, les présidents des commissions générales et les présidents des groupes parlementaires, avec la participation d'un membre du Gouvernement. Elle prépare l'ordre du jour, examine la recevabilité des textes, les renvoie aux commissions compétentes et fixe le calendrier des séances plénières.
+
+\subsection{Les neuf commissions générales}
 \begin{enumerate}
   \item Commission des lois constitutionnelles, des droits de l'homme et des libertés, de la justice, de la législation et du règlement, de l'administration ;
   \item Commission des finances et du budget ;
@@ -381,301 +407,501 @@ Les commissions sont le lieu de l'étude technique des textes avant la séance p
   \item Commission de l'éducation, de la formation professionnelle et de la jeunesse ;
   \item Commission des affaires culturelles, sociales et familiales ;
   \item Commission de la production et des échanges ;
-  \item Commission des résolutions et des pétitions.
+  \item Commission des résolutions et des pétitions. \src{S5}
 \end{enumerate}
-\src{S4}
-
-\section{Compétences : faire la loi et voter le budget}
-Au cours de l'une de ses sessions, l'Assemblée vote le budget de l'État. Si le budget n'est pas adopté avant la fin de l'année budgétaire, le Président peut reconduire par douzièmes le budget de l'exercice précédent jusqu'à l'adoption du nouveau budget (art. 16).
-
-L'Assemblée adopte les lois à la majorité simple des députés. Avant la promulgation, le Président peut demander une seconde lecture ; dans ce cas, le texte est adopté à la majorité absolue des députés (art. 19). Cette règle est distincte de la majorité requise pour une motion de censure.
-
-\section{Place du député}
-Le député représente la Nation entière, pas seulement sa circonscription. Le mandat impératif est nul : il ne reçoit pas juridiquement d'instructions obligatoires d'un électeur ou d'un groupe qui lui imposeraient son vote. Le député participe aux séances plénières, aux commissions, aux groupes parlementaires, aux questions au Gouvernement et, le cas échéant, aux commissions d'enquête.
-
-\begin{methodbox}
-Dans une copie, ne pas réduire l'Assemblée nationale à « voter les lois ». Elle participe aussi au budget, au contrôle du Gouvernement, à la navette avec le Sénat, aux commissions d'enquête et, avec le Sénat, à la mise en accusation du Président dans les conditions de l'article 53.
+\section{Compétences propres}
+\begin{itemize}
+  \item \textbf{Voter la loi} à la \textbf{majorité simple} des députés (art. 19, al. 1).
+  \item \textbf{Voter le budget de l'État} au cours de l'une de ses sessions. Si le budget n'est pas adopté avant la fin de l'année budgétaire, le Président de la République est habilité à reconduire \textbf{par douzièmes} le budget de l'exercice précédent jusqu'à l'adoption du nouveau (art. 16, al. 2, b).
+  \item \textbf{Adopter ou rejeter} les textes soumis à son réexamen par le Sénat, selon l'article 30.
+  \item Statuer sur les lois soumises à \textbf{seconde lecture} par le Président de la République : elles sont alors adoptées à la \textbf{majorité absolue} des députés (art. 19, al. 3).
+  \item \textbf{Mettre en cause la responsabilité du Gouvernement} par la motion de censure (art. 34).
+  \item Concourir, avec le Sénat, à la \textbf{mise en accusation} du Président de la République devant la Haute Cour de justice (art. 53).
+\end{itemize}
+\begin{methodbox}[title={Méthode concours — Erreur fréquente}]
+Ne pas réduire l'Assemblée nationale au vote des lois : elle vote aussi le budget, contrôle le Gouvernement, participe à la navette avec le Sénat, crée des commissions d'enquête et intervient dans la mise en accusation du Chef de l'État.
 \end{methodbox}
+\subsection{Repère d'actualité (donnée datée)}
+Le 17 mars 2026, l'Assemblée nationale a élu \textbf{Théodore DATOUO} à sa présidence, mettant fin à trente-quatre ans de présidence de Cavayé Yéguié Djibril. \src{S10} Donnée arrêtée au 17 septembre 2026 : la composition politique et les titulaires peuvent évoluer, contrairement à la règle constitutionnelle des 180 sièges.
 
-% ==================== CHAP 5 ====================
 \chapter{Le Sénat}
-
-\section{Rôle et composition}
-Le Sénat représente les collectivités territoriales décentralisées. Chacune des dix régions est représentée par dix sénateurs : sept élus au suffrage universel indirect sur une base régionale et trois nommés par le Président de la République. Le Sénat compte donc 100 membres : 70 élus et 30 nommés. Le mandat est de cinq ans. Les candidats et les personnalités nommées doivent avoir quarante ans révolus à la date de l'élection ou de la nomination. \src{S1}\src{S7}
-
-Le Code électoral précise que le collège électoral des sénateurs élus est composé des conseillers régionaux et des conseillers municipaux. Dans la période transitoire où les régions n'étaient pas encore en place, la Constitution prévoyait un collège composé exclusivement des conseillers municipaux ; cette disposition explique certaines anciennes fiches mais ne doit pas être présentée comme la règle générale actuelle.
+\section{Rôle et composition (article 20)}
+\begin{itemize}
+  \item Le Sénat \textbf{représente les collectivités territoriales décentralisées}.
+  \item \textbf{Chaque région est représentée par dix sénateurs} : \textbf{sept élus} au suffrage universel indirect sur une base régionale et \textbf{trois nommés} par le Président de la République.
+  \item Le Cameroun comptant \textbf{dix régions}, le Sénat compte \textbf{100 sénateurs}, dont \textbf{70 élus} et \textbf{30 nommés}.
+  \item Les candidats et les personnalités nommées doivent avoir \textbf{quarante ans révolus} à la date de l'élection ou de la nomination.
+  \item Le mandat des sénateurs est de \textbf{cinq ans}.
+\end{itemize}
+Le Sénat a été installé en 2013, dix-sept ans après avoir été prévu par la révision de 1996 : c'est pourquoi d'anciennes fiches présentent encore un Parlement monocaméral. Le collège électoral des sénateurs élus est composé des conseillers régionaux et des conseillers municipaux ; avant la mise en place des régions, il était composé exclusivement de conseillers municipaux (disposition transitoire de l'article 67). \src{S6} \src{S7}
 
 \section{Élection et statut des sénateurs}
-Chaque région constitue une circonscription sénatoriale. Les sénateurs élus le sont au scrutin de liste, sans vote préférentiel ni panachage, selon le mécanisme mixte majoritaire et proportionnel prévu par le Code électoral. Les listes doivent prendre en compte les composantes sociologiques de la région et le genre. Les conditions de candidature comprennent notamment la nationalité camerounaise d'origine et la résidence effective dans la région concernée. \src{S6}\src{S7}
+Chaque région constitue une circonscription sénatoriale. Les sénateurs élus le sont au scrutin de liste, sans vote préférentiel ni panachage, selon le mécanisme mixte majoritaire et proportionnel du Code électoral. Les listes doivent tenir compte des composantes sociologiques de la région et du genre. Parmi les conditions de candidature figurent la nationalité camerounaise et le rattachement effectif à la région concernée. \src{S6} \src{S7}
 
-Le Sénat n'est pas la simple copie de l'Assemblée nationale : l'Assemblée exprime la représentation nationale directe ; le Sénat introduit la représentation territoriale et la participation des collectivités décentralisées. Les deux chambres ont toutefois un rôle législatif et concourent au contrôle de l'action du Gouvernement.
-
-\section{Sessions, bureau et commissions}
-Le Sénat tient trois sessions ordinaires de 30 jours maximum chaque année, en mars, juin et novembre. Il peut être convoqué en session extraordinaire pour 15 jours maximum, sur un ordre du jour déterminé, à la demande du Président de la République ou d'un tiers des sénateurs. Les séances sont publiques, sauf huis clos exceptionnel demandé par le Gouvernement ou la majorité absolue des membres.
-
-Le bureau comprend : un Président, un premier Vice-Président, quatre Vice-Présidents, trois Questeurs, huit Secrétaires et un Secrétaire général, membre de droit. Les membres du bureau sont élus pour un an et rééligibles. Les Questeurs s'occupent du contrôle des services administratifs et financiers ; les Secrétaires contribuent à la tenue des procès-verbaux, à la lecture des notes et au contrôle des votes. \src{S7}
-
-Le Sénat organise neuf commissions générales correspondant, pour l'essentiel, aux commissions de l'Assemblée : lois constitutionnelles et justice ; finances et budget ; affaires étrangères ; défense et sécurité ; affaires économiques, programmation et aménagement du territoire ; éducation, formation professionnelle et jeunesse ; affaires culturelles, sociales et familiales ; production et échanges ; résolutions et pétitions. \src{S7}
-
-\section{Repère d'actualité}
-Depuis le 17 mars 2026, le site officiel du Sénat présente Sa Majesté Aboubakary ABDOULAYE comme Président du Sénat. Le Président du Sénat conserve une importance constitutionnelle particulière : il est l'autorité appelée à assurer l'intérim dans le scénario de vacance prévu par l'article 6 révisé lorsque le Vice-Président n'est pas pourvu ou est empêché. \src{S8}\src{S2}
-
-% ==================== CHAP 6 ====================
-\chapter{La procédure législative et les relations exécutif–Parlement}
-
-\section{L'initiative des lois}
-L'initiative des lois appartient concurremment au Président de la République et aux membres du Parlement (art. 25). Un texte initié par le Président est un \keyword{projet de loi}. Un texte initié par un parlementaire est une \keyword{proposition de loi}. Les projets et propositions sont déposés sur les bureaux de l'Assemblée nationale et du Sénat et examinés par les commissions compétentes avant leur discussion en séance plénière (art. 29).
-
-\section{Le domaine de la loi et le pouvoir réglementaire}
-La loi est votée par le Parlement. L'article 26 réserve notamment à la loi :
+\section{Organisation et fonctionnement}
 \begin{itemize}
-  \item les droits, garanties et obligations fondamentaux du citoyen ;
-  \item le statut des personnes et le régime des biens ;
-  \item l'organisation politique, administrative et judiciaire, y compris les élections, les partis politiques, la défense nationale, la justice, les infractions et les peines ;
-  \item les questions financières et patrimoniales : monnaie, budget, impôts et taxes, domaine, foncier, mines et ressources naturelles ;
-  \item la programmation des objectifs de l'action économique et sociale ;
-  \item le régime de l'éducation.
+  \item \textbf{Sessions} : trois sessions ordinaires de trente jours au maximum par an, en mars, juin et novembre ; sessions extraordinaires de quinze jours au maximum, sur ordre du jour déterminé, à la demande du Président de la République ou d'un tiers des sénateurs (art. 21).
+  \item \textbf{Séances} : publiques, avec huis clos exceptionnel à la demande du Gouvernement ou de la majorité absolue des membres (art. 22).
+  \item \textbf{Bureau} : la présentation officielle du Sénat fait état d'un Président, d'un premier Vice-Président, de quatre Vice-Présidents, de Questeurs et de Secrétaires, assistés d'un Secrétaire général ; les membres du bureau sont élus pour un an et rééligibles. \src{S7}
+  \item \textbf{Commissions générales} : le Sénat organise neuf commissions générales dont les domaines recoupent ceux de l'Assemblée nationale (lois constitutionnelles et justice ; finances et budget ; affaires étrangères ; défense et sécurité ; affaires économiques et aménagement du territoire ; éducation et jeunesse ; affaires culturelles, sociales et familiales ; production et échanges ; résolutions et pétitions). \src{S7}
 \end{itemize}
-Les matières qui ne sont pas du domaine de la loi relèvent du pouvoir réglementaire (art. 27). Le Parlement peut habiliter le Président, pour un délai limité et des objets déterminés, à prendre des ordonnances dans les matières de l'article 26. Elles entrent en vigueur dès leur publication et sont déposées pour ratification ; elles gardent un caractère réglementaire tant qu'elles ne sont pas ratifiées (art. 28).
+\section{Compétences (article 24)}
+\begin{itemize}
+  \item Le Sénat \textbf{adopte les lois à la majorité simple} des sénateurs.
+  \item Il peut \textbf{amender} un texte : les amendements sont retenus s'ils sont approuvés à la majorité simple des sénateurs.
+  \item Il peut \textbf{rejeter tout ou partie} d'un texte : le rejet doit être approuvé à la \textbf{majorité absolue} des sénateurs.
+  \item En cas de seconde lecture demandée par le Président de la République, les lois sont adoptées à la \textbf{majorité absolue} des sénateurs.
+  \item Il participe au \textbf{contrôle de l'action du Gouvernement} (questions, commissions d'enquête) et à la \textbf{mise en accusation} du Président devant la Haute Cour de justice.
+\end{itemize}
+\begin{warnbox}[title={Point de vigilance — Ce que le Sénat ne fait pas}]
+Le Sénat \textbf{ne peut pas renverser le Gouvernement} : la question de confiance et la motion de censure se jouent devant la \textbf{seule Assemblée nationale} (art. 34). Le bicamérisme camerounais est donc \textbf{inégalitaire} : en cas de désaccord persistant, c'est l'Assemblée nationale qui peut statuer définitivement.
+\end{warnbox}
+\subsection{Repère d'actualité (donnée datée)}
+Le 17 mars 2026, le Sénat a élu \textbf{Sa Majesté Aboubakary ABDOULAYE}, lamido de Rey-Bouba, à sa présidence, en remplacement de Marcel Niat Njifenji, président du Sénat depuis 2013. \src{S10} La fonction conserve une portée constitutionnelle majeure : le Président du Sénat assure l'intérim de la Présidence de la République dans le scénario de l'article 6 révisé où le poste de Vice-Président n'est pas pourvu ou son titulaire empêché.
 
-\section{La navette entre les deux chambres}
-\begin{enumerate}
-  \item Le texte adopté par l'Assemblée nationale est transmis au Président du Sénat.
-  \item Le Sénat dispose de dix jours à compter de la réception, ou de cinq jours si le Gouvernement a déclaré l'urgence.
-  \item Le Sénat peut adopter, amender ou rejeter tout ou partie du texte.
-  \item En cas d'amendements, le texte retourne à l'Assemblée nationale, qui adopte ou rejette les amendements à la majorité simple des députés.
-  \item En cas de rejet par le Sénat, le rejet doit avoir été adopté à la majorité absolue des sénateurs ; l'Assemblée réexamine alors le texte et statue à la majorité absolue de ses membres.
-  \item Si cette majorité absolue n'est pas réunie, le Président peut réunir une commission mixte paritaire. En cas d'échec ou de non-approbation par les deux chambres, il peut demander à l'Assemblée de statuer définitivement ou déclarer le texte caduc.
-\end{enumerate}
-Le Sénat adopte les lois à la majorité simple des sénateurs ; avant promulgation, le Président peut demander une seconde lecture, qui requiert alors la majorité absolue des sénateurs. \src{S1}\src{S3}
+\chapter{La procédure législative et les rapports exécutif–Parlement}
+\section{L'initiative des lois (articles 25 et 29)}
+L'initiative des lois appartient \textbf{concurremment au Président de la République et aux membres du Parlement}. Un texte déposé par le Président est un \textbf{projet de loi} ; un texte déposé par un parlementaire est une \textbf{proposition de loi}. Les projets et propositions sont déposés \textbf{à la fois} sur le bureau de l'Assemblée nationale et sur celui du Sénat, et sont examinés par les commissions compétentes avant la discussion en séance plénière. Ils peuvent faire l'objet d'amendements.
 
-\section{Promulgation et publication}
-Le Président de la République promulgue les lois adoptées par le Parlement dans un délai de quinze jours à compter de leur transmission, sauf s'il demande une seconde lecture ou saisit le Conseil constitutionnel. À l'issue du délai, après constat de la carence, le Président de l'Assemblée nationale peut se substituer au Président pour promulguer la loi. La loi est publiée au Journal officiel en français et en anglais (art. 31).
+\section{Le domaine de la loi (article 26)}
+La loi est votée par le Parlement. Relèvent notamment du domaine de la loi :
 
-\section{Messages et présence du Gouvernement}
-Le Président peut demander à être entendu par l'une des chambres ou par les deux réunies en Congrès ; il peut aussi leur adresser des messages. Ces communications ne donnent lieu à aucun débat en sa présence. Le Premier ministre et les autres membres du Gouvernement ont accès au Parlement et peuvent participer aux débats (art. 32 et 33).
-
-\section{Contrôle parlementaire du Gouvernement}
-\subsection{Questions et commissions d'enquête}
-Le Parlement contrôle l'action gouvernementale par les questions orales ou écrites et par les commissions d'enquête sur des objets déterminés. Le Gouvernement fournit les renseignements demandés, sous réserve des impératifs de défense nationale, de sécurité de l'État et du secret de l'information judiciaire. Une séance par semaine de chaque session ordinaire est réservée par priorité aux questions des parlementaires et aux réponses du Gouvernement (art. 35).
-
-\subsection{Question de confiance}
-Après délibération en Conseil ministériel, le Premier ministre peut engager devant l'Assemblée nationale la responsabilité du Gouvernement sur un programme ou une déclaration de politique générale. Le vote ne peut intervenir moins de 48 heures après la question de confiance. La confiance est refusée à la majorité absolue des membres de l'Assemblée ; seuls les votes défavorables sont recensés.
-
-\subsection{Motion de censure}
-La motion de censure doit être signée par au moins un tiers des membres de l'Assemblée nationale. Le vote ne peut intervenir moins de 48 heures après son dépôt. Elle est adoptée à la majorité des deux tiers des membres composant l'Assemblée ; seuls les votes favorables sont recensés. En cas d'adoption, le Premier ministre remet la démission du Gouvernement au Président. Les signataires d'une motion rejetée ne peuvent en déposer une nouvelle avant un an, sauf dans le cas constitutionnel prévu.
-
-\subsection{Engagement sur un texte}
-Le Premier ministre peut, après délibération du Conseil ministériel, engager la responsabilité du Gouvernement sur le vote d'un texte. Le texte est considéré comme adopté sauf si une motion de censure est déposée dans les 24 heures et adoptée selon les règles constitutionnelles.
-
-\begin{keybox}
-\textbf{Contrôle politique à mémoriser :} question orale ou écrite = information et interpellation ; commission d'enquête = investigation parlementaire sur un objet déterminé ; question de confiance = initiative du Gouvernement ; motion de censure = initiative d'au moins un tiers des députés.
+\begin{itemize}
+  \item \textbf{Les droits, garanties et obligations fondamentaux du citoyen} : sauvegarde de la liberté et de la sécurité individuelles ; régime des libertés publiques ; droit du travail, droit syndical et protection sociale ; devoirs du citoyen au regard de la défense nationale.
+  \item \textbf{Le statut des personnes et le régime des biens} : nationalité, état et capacité des personnes, régimes matrimoniaux, successions et libéralités ; obligations civiles et commerciales ; propriété mobilière et immobilière.
+  \item \textbf{L'organisation politique, administrative et judiciaire} : régime des élections présidentielle, législatives, sénatoriales, régionales et locales et des référendums ; régime des associations et des partis politiques ; organisation des collectivités territoriales décentralisées ; règles générales de la défense nationale ; organisation judiciaire et création des ordres de juridiction ; \textbf{détermination des crimes et délits, institution des peines, procédure pénale, procédure civile, voies d'exécution et amnistie}.
+  \item \textbf{Les questions financières et patrimoniales} : émission de la monnaie ; budget ; création des impôts et taxes, assiette, taux et recouvrement ; régime domanial, foncier et minier ; régime des ressources naturelles.
+  \item \textbf{La programmation des objectifs de l'action économique et sociale.}
+  \item \textbf{Le régime de l'éducation.}
+\end{itemize}
+\begin{keybox}[title={À retenir — Le point le plus utile pour un policier}]
+C'est la \textbf{loi}, et elle seule, qui détermine les crimes et délits, institue les peines et fixe la procédure pénale (art. 26, al. 2, c, 6). Aucun règlement ne peut créer une infraction. C'est le fondement du principe de \textbf{légalité des délits et des peines}, complété par le préambule : nul ne peut être poursuivi, arrêté ou détenu que dans les cas et selon les formes déterminés par la loi, et la loi n'a pas d'effet rétroactif.
 \end{keybox}
+\section{Pouvoir réglementaire et ordonnances (articles 27 et 28)}
+Les matières autres que celles du domaine de la loi \textbf{ressortissent au pouvoir réglementaire} (art. 27). Dans les matières de l'article 26, le Parlement peut \textbf{habiliter le Président de la République, pendant un délai limité et sur des objets déterminés, à prendre des ordonnances}. Ces ordonnances entrent en vigueur \textbf{dès leur publication} ; elles sont déposées sur les bureaux des deux chambres aux fins de ratification dans le délai fixé par la loi d'habilitation ; elles conservent un \textbf{caractère réglementaire tant qu'elles ne sont pas ratifiées} et demeurent en vigueur tant que le Parlement n'a pas refusé de les ratifier.
 
-\section{Référendum et Conseil constitutionnel}
-Après consultation des autorités constitutionnelles compétentes, le Président peut soumettre au référendum un projet de réforme relevant du domaine de la loi et susceptible d'avoir de profondes répercussions sur l'avenir de la Nation et les institutions. Le Conseil constitutionnel statue sur la constitutionnalité des lois, des traités et des règlements intérieurs des chambres ; il régule le fonctionnement des institutions et proclame les résultats des élections présidentielle et parlementaires. Ses décisions ne sont susceptibles d'aucun recours (art. 46 à 50).
+\section{La navette entre les deux chambres (article 30)}
+\begin{enumerate}
+  \item Le texte adopté par l'Assemblée nationale est \textbf{aussitôt transmis} au Président du Sénat par le Président de l'Assemblée nationale.
+  \item Le Président du Sénat le soumet à la délibération du Sénat, qui dispose de \textbf{dix jours} à compter de la réception, ou de \textbf{cinq jours} pour les textes dont le Gouvernement a déclaré l'urgence.
+  \item \textbf{Si le Sénat adopte le texte} : il est retourné au Président de l'Assemblée nationale, qui le transmet dans les \textbf{quarante-huit heures} au Président de la République aux fins de promulgation.
+  \item \textbf{Si le Sénat amende le texte} (amendements approuvés à la majorité simple des sénateurs) : le texte amendé retourne à l'Assemblée nationale, qui adopte ou rejette les amendements à la majorité simple des députés ; le texte définitif est transmis au Président de la République.
+  \item \textbf{Si le Sénat rejette tout ou partie du texte} (rejet approuvé à la majorité absolue des sénateurs) : le texte, accompagné de l'exposé des motifs du rejet, retourne à l'Assemblée nationale, qui peut l'adopter à la \textbf{majorité absolue} des députés ; il est alors transmis pour promulgation.
+  \item \textbf{En l'absence de cette majorité absolue} : le Président de la République peut provoquer la réunion d'une \textbf{commission mixte paritaire} chargée de proposer un texte commun. Ce texte est soumis pour approbation aux deux chambres, aucun amendement n'étant recevable sauf accord du Président. En cas d'échec de la commission ou de non-adoption, le Président peut soit demander à l'\textbf{Assemblée nationale de statuer définitivement}, soit \textbf{déclarer le texte caduc}.
+\end{enumerate}
+\section{Promulgation et publication (article 31)}
+\begin{itemize}
+  \item Le Président de la République promulgue les lois \textbf{dans un délai de quinze jours} à compter de leur transmission, s'il ne demande pas de seconde lecture et ne saisit pas le Conseil constitutionnel.
+  \item À l'issue de ce délai, \textbf{après avoir constaté sa carence}, le \textbf{Président de l'Assemblée nationale peut se substituer} au Président de la République pour promulguer.
+  \item La publication est effectuée au \textbf{Journal officiel} de la République, \textbf{en français et en anglais}.
+  \item La \textbf{saisine du Conseil constitutionnel suspend} le délai de promulgation (art. 47, al. 3).
+\end{itemize}
+\begin{defbox}[title={Définition — Quatre mots à ne pas confondre}]
+\textbf{Adoption} : vote du texte par le Parlement.
 
-\section{Révision de la Constitution}
-L'initiative de la révision appartient concurremment au Président et au Parlement. Une proposition parlementaire doit être signée par au moins un tiers des membres de l'une ou l'autre chambre. Le Parlement se réunit en Congrès pour se prononcer sur la révision ; le texte est adopté à la majorité absolue des membres le composant. Le Président peut demander une seconde lecture : la révision est alors votée à la majorité des deux tiers des membres composant le Parlement. Il peut aussi soumettre le texte au référendum, auquel cas il est adopté à la majorité simple des suffrages exprimés. Aucune révision ne peut porter atteinte à la forme républicaine, à l'unité, à l'intégrité territoriale et aux principes démocratiques (art. 63 et 64).
+\textbf{Promulgation} : acte du Président qui atteste l'existence de la loi et ordonne son exécution.
 
-% ==================== CHAP 7 ====================
-\chapter{Tableaux comparatifs et méthode de réponse}
+\textbf{Publication} : insertion au Journal officiel, qui rend la loi opposable.
 
-\section{Président, Gouvernement, Parlement : qui fait quoi ?}
-\begin{longtable}{>{\raggedright\arraybackslash}p{0.22\textwidth} >{\raggedright\arraybackslash}p{0.34\textwidth} >{\raggedright\arraybackslash}p{0.34\textwidth}}
+\textbf{Entrée en vigueur} : moment où la loi devient applicable, selon ce qu'elle prévoit.
+\end{defbox}
+\section{Messages et présence du Gouvernement (articles 32 et 33)}
+Le Président de la République peut, sur sa demande, être entendu par l'Assemblée nationale, par le Sénat ou par les deux chambres réunies en Congrès ; il peut également leur adresser des messages. \textbf{Ces communications ne donnent lieu à aucun débat en sa présence.} Le Premier ministre et les autres membres du Gouvernement ont accès au Parlement et peuvent participer aux débats.
+
+\section{La responsabilité du Gouvernement (article 34)}
+\subsection{La question de confiance}
+Lors de la session au cours de laquelle le projet de loi de finances est examiné, le Premier ministre présente à l'Assemblée nationale le programme économique, financier, social et culturel du Gouvernement. Après délibération du conseil ministériel, il peut \textbf{engager la responsabilité du Gouvernement} devant l'Assemblée nationale sur un programme ou sur une déclaration de politique générale. Le vote ne peut intervenir \textbf{moins de quarante-huit heures} après la question de confiance. La confiance est refusée à la \textbf{majorité absolue des membres} de l'Assemblée ; \textbf{seuls les votes défavorables sont recensés}.
+
+\subsection{La motion de censure}
+\begin{itemize}
+  \item Elle doit être \textbf{signée par au moins un tiers} des membres de l'Assemblée nationale pour être recevable.
+  \item Le vote ne peut intervenir \textbf{moins de quarante-huit heures} après le dépôt.
+  \item Elle est adoptée à la \textbf{majorité des deux tiers des membres composant} l'Assemblée nationale ; \textbf{seuls les votes favorables sont recensés}.
+  \item En cas de rejet, les signataires ne peuvent en déposer une nouvelle \textbf{avant un délai d'un an}, sauf dans le cas de l'engagement de responsabilité sur un texte.
+\end{itemize}
+\subsection{L'engagement de responsabilité sur un texte}
+Après délibération du conseil ministériel, le Premier ministre peut engager la responsabilité du Gouvernement sur le \textbf{vote d'un texte}. Le texte est alors considéré comme adopté, \textbf{sauf si une motion de censure déposée dans les vingt-quatre heures} qui suivent est votée dans les conditions ci-dessus.
+
+\subsection{Les suites}
+Lorsque l'Assemblée nationale adopte une motion de censure ou refuse la confiance, le Premier ministre \textbf{doit remettre au Président de la République la démission du Gouvernement}. Le Président peut \textbf{reconduire le Premier ministre} dans ses fonctions et lui demander de former un nouveau Gouvernement.
+
+\begin{longtable}{>{\raggedright\arraybackslash}p{0.205\textwidth} >{\raggedright\arraybackslash}p{0.260\textwidth} >{\raggedright\arraybackslash}p{0.279\textwidth} >{\raggedright\arraybackslash}p{0.186\textwidth}}
 \toprule
-\textbf{Institution} & \textbf{Fonction principale} & \textbf{Repère constitutionnel}\
-\midrule
-\endhead
-Président de la République & Chef de l'État ; définit la politique nationale ; arbitre ; garantit indépendance, territoire et continuité ; nomme ; promulgue ; exerce certains pouvoirs de crise. & Art. 5 à 10 ; réforme 2026 pour le Vice-Président.\
-Gouvernement & Met en œuvre la politique définie par le Président ; responsable devant l'Assemblée nationale. & Art. 11 et 12.\
-Premier ministre & Chef du Gouvernement ; dirige son action ; exécute les lois ; exerce le pouvoir réglementaire sous réserve des prérogatives présidentielles. & Art. 12.\
-Assemblée nationale & Représentation nationale directe ; vote, budget, contrôle ; première chambre de la navette. & Art. 15 à 19 et 30 à 35.\
-Sénat & Représentation des collectivités territoriales décentralisées ; seconde chambre ; rôle de navette et de contrôle. & Art. 20 à 24 et 30 à 35.\
-Parlement en Congrès & Réunion des deux chambres dans des cas déterminés. & Art. 14 et 63.\
-Conseil constitutionnel & Contrôle de constitutionnalité, régulation institutionnelle et proclamation de résultats électoraux. & Art. 46 à 50.\
+\textbf{\color{navy}Mécanisme} & \textbf{\color{navy}Initiative} & \textbf{\color{navy}Majorité requise} & \textbf{\color{navy}Votes recensés} \\
+\midrule\endhead
+Question de confiance & Premier ministre, après délibération du conseil ministériel & Confiance refusée à la majorité absolue des membres & Seuls les votes défavorables \\
+\addlinespace[1pt]
+Motion de censure & Au moins un tiers des députés & Deux tiers des membres composant l'Assemblée & Seuls les votes favorables \\
+\addlinespace[1pt]
+Engagement sur un texte & Premier ministre & Texte adopté sauf censure votée dans les mêmes conditions & Censure déposée dans les 24 heures \\
+\addlinespace[1pt]
 \bottomrule
 \end{longtable}
+\section{Le contrôle parlementaire (article 35)}
+\begin{itemize}
+  \item Le Parlement contrôle l'action gouvernementale par les \textbf{questions orales ou écrites} et par la constitution de \textbf{commissions d'enquête} sur des objets déterminés.
+  \item Le Gouvernement \textbf{fournit des renseignements} au Parlement, sous réserve des impératifs de la défense nationale, de la sécurité de l'État ou du \textbf{secret de l'information judiciaire}.
+  \item Au cours de chaque session ordinaire, \textbf{une séance par semaine} est réservée par priorité aux questions des parlementaires et aux réponses du Gouvernement.
+\end{itemize}
+\section{Le référendum (article 36)}
+Après consultation du Président du Conseil constitutionnel, du Président de l'Assemblée nationale et du Président du Sénat, le Président de la République peut soumettre au référendum tout projet de réforme qui, bien que relevant du domaine de la loi, serait susceptible d'avoir des répercussions profondes sur l'avenir de la Nation et les institutions : projets portant sur l'organisation des pouvoirs publics ou sur la révision de la Constitution, ratification de traités d'importance particulière, certaines réformes du statut des personnes et du régime des biens. Le projet est \textbf{adopté à la majorité des suffrages exprimés}.
 
+\section{Le Conseil constitutionnel (articles 46 à 52)}
+\begin{itemize}
+  \item Il est l'\textbf{instance compétente en matière constitutionnelle} et l'\textbf{organe régulateur du fonctionnement des institutions}.
+  \item Il statue souverainement sur la \textbf{constitutionnalité des lois, des traités et accords internationaux}, sur les \textbf{règlements intérieurs} des deux chambres avant leur mise en application, et sur les \textbf{conflits d'attribution} entre institutions de l'État, entre l'État et les régions, ou entre régions.
+  \item Il est saisi par le \textbf{Président de la République}, le \textbf{Président de l'Assemblée nationale}, le \textbf{Président du Sénat}, \textbf{un tiers des députés} ou \textbf{un tiers des sénateurs} ; les présidents des exécutifs régionaux peuvent le saisir lorsque les intérêts de leur région sont en cause.
+  \item Il \textbf{veille à la régularité de l'élection présidentielle, des élections parlementaires et des consultations référendaires} et en \textbf{proclame les résultats} (art. 48).
+  \item Il statue dans un \textbf{délai de quinze jours}, ramené à \textbf{huit jours} à la demande du Président de la République (art. 49).
+  \item Ses \textbf{décisions ne sont susceptibles d'aucun recours} et s'imposent aux pouvoirs publics et à toutes les autorités administratives, militaires et juridictionnelles ainsi qu'à toute personne (art. 50).
+  \item Il comprend \textbf{onze membres} nommés par le Président de la République pour un mandat de \textbf{six ans éventuellement renouvelable} (durée issue de la révision de 2008) : trois désignés par le Président de la République dont le président du Conseil, trois par le Président de l'Assemblée nationale après avis du bureau, trois par le Président du Sénat après avis du bureau, et deux par le Conseil supérieur de la magistrature. Les anciens Présidents de la République en sont membres \textbf{de droit et à vie} (art. 51).
+\end{itemize}
+\section{Les traités (articles 43 à 45)}
+Le Président de la République \textbf{négocie et ratifie} les traités et accords internationaux. Ceux qui concernent le domaine de la loi défini à l'article 26 sont soumis, \textbf{avant ratification, à l'approbation en forme législative par le Parlement}. Si le Conseil constitutionnel déclare qu'un traité comporte une clause contraire à la Constitution, l'approbation ou la ratification ne peut intervenir qu'après révision de la Constitution. Les traités régulièrement approuvés ou ratifiés ont, dès leur publication, une \textbf{autorité supérieure à celle des lois}, sous réserve de réciprocité.
+
+\section{La révision de la Constitution (articles 63 et 64)}
+\begin{itemize}
+  \item L'initiative appartient \textbf{concurremment au Président de la République et au Parlement}.
+  \item Toute proposition émanant des parlementaires doit être signée par \textbf{un tiers au moins} des membres de l'une ou l'autre chambre.
+  \item Le Parlement se réunit en \textbf{Congrès} ; le texte est adopté à la \textbf{majorité absolue des membres le composant}.
+  \item Le Président peut demander une \textbf{seconde lecture} : la révision est alors votée à la \textbf{majorité des deux tiers} des membres composant le Parlement.
+  \item Le Président peut soumettre la révision au \textbf{référendum} : le texte est alors adopté à la \textbf{majorité simple des suffrages exprimés}.
+  \item \textbf{Limite absolue} : aucune révision ne peut porter atteinte à la \textbf{forme républicaine}, à l'\textbf{unité et à l'intégrité territoriale} de l'État, ni aux \textbf{principes démocratiques} qui régissent la République (art. 64).
+\end{itemize}
+C'est par cette procédure qu'a été adoptée la révision du 4 avril 2026, votée en Congrès puis promulguée le 14 avril 2026. \src{S3}
+
+\chapter{Tableaux de synthèse et méthode}
+\section{Qui fait quoi ?}
+\begin{longtable}{>{\raggedright\arraybackslash}p{0.223\textwidth} >{\raggedright\arraybackslash}p{0.484\textwidth} >{\raggedright\arraybackslash}p{0.223\textwidth}}
+\toprule
+\textbf{\color{navy}Institution} & \textbf{\color{navy}Fonction principale} & \textbf{\color{navy}Base constitutionnelle} \\
+\midrule\endhead
+Président de la République & Chef de l'État ; définit la politique de la Nation ; arbitre ; nomme ; promulgue ; pouvoirs de crise & Art. 5 à 10 \\
+\addlinespace[1pt]
+Vice-Président & Assiste le Président par délégation expresse ; achève le mandat en cas de vacance & Art. 5, 6, 7 et 10 (révision 2026) \\
+\addlinespace[1pt]
+Gouvernement & Met en œuvre la politique définie par le Président ; responsable devant l'Assemblée nationale & Art. 11 \\
+\addlinespace[1pt]
+Premier ministre & Chef du Gouvernement ; exécute les lois ; pouvoir réglementaire subordonné & Art. 12 \\
+\addlinespace[1pt]
+Assemblée nationale & Vote la loi et le budget ; contrôle ; première chambre de la navette & Art. 15 à 19, 30 à 35 \\
+\addlinespace[1pt]
+Sénat & Représente les collectivités territoriales ; seconde chambre de la navette ; contrôle & Art. 20 à 24, 30 à 35 \\
+\addlinespace[1pt]
+Congrès & Message présidentiel, serment des membres du Conseil constitutionnel, révision & Art. 14 et 63 \\
+\addlinespace[1pt]
+Conseil constitutionnel & Constitutionnalité, régulation, proclamation des résultats & Art. 46 à 52 \\
+\addlinespace[1pt]
+\bottomrule
+\end{longtable}
 \section{Assemblée nationale et Sénat : les différences}
-\begin{longtable}{>{\raggedright\arraybackslash}p{0.26\textwidth} >{\raggedright\arraybackslash}p{0.32\textwidth} >{\raggedright\arraybackslash}p{0.32\textwidth}}
+\begin{longtable}{>{\raggedright\arraybackslash}p{0.223\textwidth} >{\raggedright\arraybackslash}p{0.353\textwidth} >{\raggedright\arraybackslash}p{0.353\textwidth}}
 \toprule
-\textbf{Critère} & \textbf{Assemblée nationale} & \textbf{Sénat}\
-\midrule
-\endhead
-Représentation & Nation entière & Collectivités territoriales décentralisées\
-Effectif constitutionnel & 180 députés & 100 sénateurs\
-Désignation & Suffrage universel direct et secret & 70 élus au suffrage indirect + 30 nommés par le Président\
-Répartition & Selon les circonscriptions fixées par la loi & Dix sénateurs par région\
-Mandat & Cinq ans & Cinq ans\
-Âge électoral du candidat & 23 ans selon le Code électoral & 40 ans selon la Constitution et la loi\
-Sessions & Trois sessions ordinaires de 30 jours max ; extraordinaire 15 jours max & Même régime constitutionnel\
-Présidence actuelle (date du document) & Théodore Datouo & Aboubakary Abdoulaye\
+\textbf{\color{navy}Critère} & \textbf{\color{navy}Assemblée nationale} & \textbf{\color{navy}Sénat} \\
+\midrule\endhead
+Représentation & La Nation tout entière & Les collectivités territoriales décentralisées \\
+\addlinespace[1pt]
+Effectif constitutionnel & 180 députés & 100 sénateurs \\
+\addlinespace[1pt]
+Désignation & Suffrage universel direct et secret & 70 élus au suffrage indirect + 30 nommés par le Président \\
+\addlinespace[1pt]
+Base territoriale & Circonscriptions fixées par la loi & Dix sénateurs par région \\
+\addlinespace[1pt]
+Durée du mandat & Cinq ans & Cinq ans \\
+\addlinespace[1pt]
+Âge minimal & 23 ans (Code électoral) & 40 ans (Constitution, art. 20) \\
+\addlinespace[1pt]
+Sessions & Trois sessions ordinaires de 30 jours ; extraordinaire 15 jours & Même régime \\
+\addlinespace[1pt]
+Dissolution possible & Oui, par le Président (art. 8, al. 12) & Non prévue par la Constitution \\
+\addlinespace[1pt]
+Renverser le Gouvernement & Oui (question de confiance, motion de censure) & Non \\
+\addlinespace[1pt]
+Dernier mot dans la navette & Oui, si le Président le demande (art. 30) & Non \\
+\addlinespace[1pt]
+Présidence au 17 septembre 2026 & Théodore Datouo (depuis le 17 mars 2026) & Aboubakary Abdoulaye (depuis le 17 mars 2026) \\
+\addlinespace[1pt]
 \bottomrule
 \end{longtable}
-
+\section{Les délais et chiffres à retenir}
+\begin{longtable}{>{\raggedright\arraybackslash}p{0.205\textwidth} >{\raggedright\arraybackslash}p{0.725\textwidth}}
+\toprule
+\textbf{\color{navy}Chiffre} & \textbf{\color{navy}Ce qu'il désigne} \\
+\midrule\endhead
+20 ans & Âge de participation au vote (art. 2, al. 3) \\
+\addlinespace[1pt]
+23 ans & Âge minimal du candidat à la députation (Code électoral) \\
+\addlinespace[1pt]
+35 ans & Âge minimal du candidat à la Présidence (art. 6) \\
+\addlinespace[1pt]
+40 ans & Âge minimal du sénateur (art. 20) \\
+\addlinespace[1pt]
+5 ans & Mandat des députés et des sénateurs \\
+\addlinespace[1pt]
+7 ans & Mandat du Président de la République \\
+\addlinespace[1pt]
+6 ans & Mandat des membres du Conseil constitutionnel (depuis 2008) \\
+\addlinespace[1pt]
+180 / 100 & Députés / sénateurs \\
+\addlinespace[1pt]
+70 / 30 & Sénateurs élus / sénateurs nommés \\
+\addlinespace[1pt]
+3 × 30 jours & Sessions ordinaires annuelles et durée maximale de chacune \\
+\addlinespace[1pt]
+15 jours & Durée maximale d'une session extraordinaire ; délai de promulgation ; délai de décision du Conseil constitutionnel \\
+\addlinespace[1pt]
+10 / 5 jours & Délai d'examen du Sénat dans la navette (procédure normale / urgence) \\
+\addlinespace[1pt]
+48 heures & Délai avant le vote d'une question de confiance ou d'une motion de censure ; transmission du texte adopté pour promulgation \\
+\addlinespace[1pt]
+24 heures & Délai de dépôt d'une motion de censure après un engagement de responsabilité sur un texte \\
+\addlinespace[1pt]
+20 à 50 jours & Fenêtre de l'élection présidentielle avant l'expiration du mandat en cours \\
+\addlinespace[1pt]
+20 à 120 jours & Fenêtre du scrutin en cas de vacance sans Vice-Président en fonctions \\
+\addlinespace[1pt]
+1/3 – 2/3 – 4/5 & Dépôt d'une motion de censure ; adoption de la censure et seconde lecture d'une révision ; mise en accusation du Président \\
+\addlinespace[1pt]
+\bottomrule
+\end{longtable}
 \section{Méthode pour une question de cours}
 \begin{enumerate}
-  \item \textbf{Définir le sujet.} Exemple : le Président est le Chef de l'État ; le Parlement est le pouvoir législatif bicaméral.
-  \item \textbf{Annoncer le fondement.} Citer l'article pertinent : 5, 6, 8, 14, 15, 20, 25, 30, 34 ou 35.
-  \item \textbf{Classer les règles.} Statut, composition, compétences, fonctionnement, limites.
-  \item \textbf{Distinguer le droit et l'actualité.} Un nom de titulaire peut changer ; un article constitutionnel reste la règle jusqu'à modification.
-  \item \textbf{Conclure par la portée.} Pour l'EIP : légalité, ordre public, sécurité, responsabilité et respect des libertés.
+  \item \textbf{Définir} le sujet en une phrase juridique.
+  \item \textbf{Annoncer le fondement} : citer l'article (5, 6, 8, 14, 15, 20, 26, 30, 31, 34, 35…).
+  \item \textbf{Classer} : statut, composition, compétences, fonctionnement, limites.
+  \item \textbf{Distinguer} la règle et l'actualité : un titulaire change, un article demeure.
+  \item \textbf{Conclure} par la portée pratique, en particulier pour la police : légalité, ordre public, responsabilité, libertés.
 \end{enumerate}
+\begin{methodbox}[title={Méthode concours — Modèle de réponse courte}]
+\textbf{Question : « Quel est le rôle du Parlement camerounais ? »}
 
-\subsection*{Modèle de réponse courte}
-\begin{methodbox}
-\textbf{Question : « Quel est le rôle du Parlement camerounais ? »}\\
-\textbf{Réponse :} « Selon l'article 14 de la Constitution, le pouvoir législatif est exercé par un Parlement bicaméral composé de l'Assemblée nationale et du Sénat. Le Parlement légifère et contrôle l'action du Gouvernement. Il vote les lois selon la procédure de navette, participe au vote du budget, exerce le contrôle par les questions et commissions d'enquête et peut mettre en cause la responsabilité du Gouvernement par les mécanismes prévus à l'article 34. »
+« Selon l'article 14 de la Constitution, le pouvoir législatif est exercé par un Parlement bicaméral composé de l'Assemblée nationale et du Sénat. Le Parlement légifère et contrôle l'action du Gouvernement. Il vote la loi selon la procédure de navette de l'article 30, vote le budget de l'État, contrôle le Gouvernement par les questions et les commissions d'enquête de l'article 35, et peut mettre en cause sa responsabilité dans les conditions de l'article 34, cette dernière prérogative appartenant à la seule Assemblée nationale. »
 \end{methodbox}
-
-% ==================== CHAP 8 ====================
-\chapter{Entraînement EIP : questions et corrigé}
-
-\section{QCM d'entraînement}
-Pour chaque question, une seule réponse est exacte, sauf indication contraire.
-
-\begin{enumerate}[label=\textbf{Q\arabic*.},leftmargin=2.1em]
+\chapter{Entraînement : QCM et corrigé commenté}
+\section{QCM (une seule réponse exacte par question)}
+\begin{enumerate}[label=\textbf{Q\arabic*.},leftmargin=2.4em]
   \item Le Parlement camerounais comprend :\\
-  A. le Gouvernement et le Conseil constitutionnel ;\quad B. l'Assemblée nationale et le Sénat ;\quad C. l'Assemblée nationale et la Cour suprême. 
-  \item Le Président de la République est élu pour :\\ A. 5 ans ;\quad B. 6 ans ;\quad C. 7 ans.
-  \item Depuis la loi de 2008, le Président est :\\ A. rééligible ;\quad B. limité à deux mandats ;\quad C. nommé par le Sénat.
-  \item Le Président est élu au :\\ A. suffrage indirect ;\quad B. suffrage universel direct, égal et secret ;\quad C. scrutin public du Parlement.
-  \item Le Chef du Gouvernement est :\\ A. le Président de la République ;\quad B. le Président de l'Assemblée ;\quad C. le Premier ministre.
-  \item Le nombre constitutionnel de députés est :\\ A. 100 ;\quad B. 180 ;\quad C. 360.
-  \item Le Sénat compte :\\ A. 70 membres ;\quad B. 100 membres ;\quad C. 180 membres.
-  \item Dans chaque région, le Sénat compte :\\ A. 7 sénateurs ;\quad B. 10 sénateurs ;\quad C. 30 sénateurs.
-  \item Les 30 sénateurs nommés le sont par :\\ A. le Conseil constitutionnel ;\quad B. le Président de la République ;\quad C. les maires.
-  \item Les sessions ordinaires du Parlement se tiennent en :\\ A. janvier, mai, septembre ;\quad B. mars, juin, novembre ;\quad C. février, juillet, décembre.
-  \item La durée maximale d'une session extraordinaire est de :\\ A. 7 jours ;\quad B. 15 jours ;\quad C. 30 jours.
-  \item Le Parlement exerce notamment :\\ A. le pouvoir judiciaire ;\quad B. le pouvoir législatif et le contrôle de l'action du Gouvernement ;\quad C. la direction des forces armées.
-  \item Le projet de loi est normalement déposé par :\\ A. le Président de la République ;\quad B. un juge ;\quad C. le Conseil constitutionnel.
-  \item La proposition de loi est déposée par :\\ A. les membres du Parlement ;\quad B. les ambassadeurs ;\quad C. les préfets.
-  \item Après l'Assemblée nationale, le texte est transmis :\\ A. au Sénat ;\quad B. directement à la Cour suprême ;\quad C. à ELECAM.
-  \item Le délai ordinaire du Sénat pour examiner un texte transmis est de :\\ A. 5 jours ;\quad B. 10 jours ;\quad C. 45 jours.
-  \item Le délai de promulgation prévu à l'article 31 est de :\\ A. 15 jours ;\quad B. 30 jours ;\quad C. 120 jours.
-  \item Une motion de censure doit être signée par au moins :\\ A. un dixième des députés ;\quad B. un tiers des députés ;\quad C. les deux tiers des sénateurs.
-  \item Le Président du Sénat assure l'intérim présidentiel en 2026 :\\ A. dans tous les cas ;\quad B. si le Vice-Président n'est pas pourvu ou est empêché, selon l'article 6 révisé ;\quad C. jamais.
-  \item Les deux chambres réunies forment :\\ A. le Congrès ;\quad B. le Conseil des ministres ;\quad C. la Haute Cour.
+  \textbf{A.} le Gouvernement et le Conseil constitutionnel \quad \textbf{B.} l'Assemblée nationale et le Sénat \quad \textbf{C.} l'Assemblée nationale et la Cour suprême
+  \item Le Président de la République est élu pour :\\
+  \textbf{A.} cinq ans \quad \textbf{B.} six ans \quad \textbf{C.} sept ans
+  \item Depuis la révision de 2008, le Président de la République est :\\
+  \textbf{A.} rééligible sans limitation \quad \textbf{B.} limité à deux mandats \quad \textbf{C.} élu par le Parlement
+  \item Le Président de la République est élu au :\\
+  \textbf{A.} suffrage universel indirect \quad \textbf{B.} suffrage universel direct, égal et secret \quad \textbf{C.} scrutin public du Congrès
+  \item Le Chef du Gouvernement est :\\
+  \textbf{A.} le Président de la République \quad \textbf{B.} le Président de l'Assemblée nationale \quad \textbf{C.} le Premier ministre
+  \item Le nombre constitutionnel de députés est :\\
+  \textbf{A.} 100 \quad \textbf{B.} 180 \quad \textbf{C.} 360
+  \item Le Sénat compte :\\
+  \textbf{A.} 70 membres \quad \textbf{B.} 100 membres \quad \textbf{C.} 180 membres
+  \item Chaque région est représentée au Sénat par :\\
+  \textbf{A.} 7 sénateurs \quad \textbf{B.} 10 sénateurs \quad \textbf{C.} 30 sénateurs
+  \item Les trente sénateurs nommés le sont par :\\
+  \textbf{A.} le Conseil constitutionnel \quad \textbf{B.} le Président de la République \quad \textbf{C.} les maires
+  \item Les sessions ordinaires du Parlement se tiennent en :\\
+  \textbf{A.} janvier, mai et septembre \quad \textbf{B.} mars, juin et novembre \quad \textbf{C.} février, juillet et décembre
+  \item La durée maximale d'une session extraordinaire est de :\\
+  \textbf{A.} 7 jours \quad \textbf{B.} 15 jours \quad \textbf{C.} 30 jours
+  \item L'âge minimal pour être sénateur est de :\\
+  \textbf{A.} 35 ans \quad \textbf{B.} 40 ans \quad \textbf{C.} 45 ans
+  \item L'initiative des lois appartient :\\
+  \textbf{A.} au seul Gouvernement \quad \textbf{B.} au Président de la République et aux membres du Parlement \quad \textbf{C.} au Conseil constitutionnel
+  \item Un texte déposé par un parlementaire s'appelle :\\
+  \textbf{A.} un projet de loi \quad \textbf{B.} une proposition de loi \quad \textbf{C.} une ordonnance
+  \item Dans la navette, le délai ordinaire d'examen du Sénat est de :\\
+  \textbf{A.} 5 jours \quad \textbf{B.} 10 jours \quad \textbf{C.} 45 jours
+  \item Le délai de promulgation de l'article 31 est de :\\
+  \textbf{A.} 15 jours \quad \textbf{B.} 30 jours \quad \textbf{C.} 120 jours
+  \item Une motion de censure doit être signée par au moins :\\
+  \textbf{A.} un dixième des députés \quad \textbf{B.} un tiers des députés \quad \textbf{C.} les deux tiers des sénateurs
+  \item La motion de censure est adoptée à la majorité :\\
+  \textbf{A.} simple des votants \quad \textbf{B.} absolue des députés \quad \textbf{C.} des deux tiers des membres composant l'Assemblée nationale
+  \item Depuis la révision de 2026, en cas de vacance de la Présidence :\\
+  \textbf{A.} le Président du Sénat achève toujours le mandat \quad \textbf{B.} le Vice-Président achève le mandat, et à défaut le Président du Sénat assure l'intérim avant un nouveau scrutin \quad \textbf{C.} le Premier ministre devient Président
+  \item Les deux chambres réunies forment :\\
+  \textbf{A.} le Congrès \quad \textbf{B.} le Conseil des ministres \quad \textbf{C.} la Haute Cour de justice
+  \item La mise en accusation du Président devant la Haute Cour de justice exige :\\
+  \textbf{A.} la majorité simple des deux chambres \quad \textbf{B.} un vote identique des deux chambres à la majorité des quatre cinquièmes \quad \textbf{C.} une décision du Conseil constitutionnel
+  \item L'état d'exception est proclamé :\\
+  \textbf{A.} par une loi du Parlement \quad \textbf{B.} par décret du Président de la République \quad \textbf{C.} par arrêté du Premier ministre
+  \item Le droit de grâce est exercé par le Président :\\
+  \textbf{A.} après avis du Conseil supérieur de la magistrature \quad \textbf{B.} après vote du Parlement \quad \textbf{C.} librement et sans avis
+  \item La détermination des crimes et délits relève :\\
+  \textbf{A.} du pouvoir réglementaire \quad \textbf{B.} du domaine de la loi \quad \textbf{C.} d'une décision du Conseil constitutionnel
+  \item Le Conseil constitutionnel statue normalement dans un délai de :\\
+  \textbf{A.} 8 jours \quad \textbf{B.} 15 jours \quad \textbf{C.} 30 jours
 \end{enumerate}
-
 \section{Corrigé commenté}
-\begin{longtable}{p{0.08\textwidth} >{\raggedright\arraybackslash}p{0.84\textwidth}}
+\begin{longtable}{>{\raggedright\arraybackslash}p{0.056\textwidth} >{\raggedright\arraybackslash}p{0.874\textwidth}}
 \toprule
-\textbf{Q} & \textbf{Réponse et justification}\
-\midrule
-\endhead
-1 & \textbf{B.} Article 14 : deux chambres, Assemblée nationale et Sénat.\
-2 & \textbf{C.} Article 6 : sept ans.\
-3 & \textbf{A.} Le texte actuel dit « il est rééligible » ; la limitation « renouvelable une fois » a été supprimée en 2008.\
-4 & \textbf{B.} Suffrage universel direct, égal et secret.\
-5 & \textbf{C.} Article 12 : le Premier ministre est Chef du Gouvernement.\
-6 & \textbf{B.} Article 15 : 180 députés, nombre susceptible d'être modifié par la loi.\
-7 & \textbf{B.} 100 sénateurs.\
-8 & \textbf{B.} Dix par région : 7 élus et 3 nommés.\
-9 & \textbf{B.} Le Président de la République nomme 30 sénateurs.\
-10 & \textbf{B.} Mars, juin et novembre.\
-11 & \textbf{B.} Quinze jours maximum, ordre du jour déterminé.\
-12 & \textbf{B.} Article 14 : légiférer et contrôler l'action du Gouvernement.\
-13 & \textbf{A.} Le Président de la République est l'un des titulaires de l'initiative des lois.\
-14 & \textbf{A.} Les membres du Parlement sont titulaires de l'initiative parlementaire.\
-15 & \textbf{A.} La navette commence par l'examen du texte adopté par l'Assemblée nationale.\
-16 & \textbf{B.} Dix jours, ou cinq jours en cas d'urgence déclarée par le Gouvernement.\
-17 & \textbf{A.} Article 31 : quinze jours, sauf seconde lecture ou saisine constitutionnelle.\
-18 & \textbf{B.} Au moins un tiers des membres de l'Assemblée nationale.\
-19 & \textbf{B.} Le mécanisme de 2026 réserve l'intérim au Président du Sénat lorsque le Vice-Président n'est pas pourvu ou est empêché.\
-20 & \textbf{A.} Les deux chambres réunies en Congrès.\
+\textbf{\color{navy}Q} & \textbf{\color{navy}Réponse et justification} \\
+\midrule\endhead
+1 & \textbf{B.} Article 14, alinéa 1 : Assemblée nationale et Sénat. \\
+\addlinespace[1pt]
+2 & \textbf{C.} Article 6, alinéa 2 : sept ans. \\
+\addlinespace[1pt]
+3 & \textbf{A.} La loi n° 2008/001 a supprimé « renouvelable une fois » ; le texte dit « Il est rééligible ». \\
+\addlinespace[1pt]
+4 & \textbf{B.} Article 6, alinéa 1 : suffrage universel direct, égal et secret, à la majorité des suffrages exprimés. \\
+\addlinespace[1pt]
+5 & \textbf{C.} Article 12, alinéa 1 : le Premier ministre est le Chef du Gouvernement. \\
+\addlinespace[1pt]
+6 & \textbf{B.} Article 15 : 180 députés ; ce nombre peut être modifié par la loi. \\
+\addlinespace[1pt]
+7 & \textbf{B.} Article 20 : dix régions × dix sénateurs = 100. \\
+\addlinespace[1pt]
+8 & \textbf{B.} Article 20, alinéa 2 : dix sénateurs par région, dont 7 élus et 3 nommés. \\
+\addlinespace[1pt]
+9 & \textbf{B.} Les trois sénateurs par région non élus sont nommés par le Président de la République. \\
+\addlinespace[1pt]
+10 & \textbf{B.} Article 14, alinéa 3, a, tel que modifié en 2008 : mars, juin et novembre. \\
+\addlinespace[1pt]
+11 & \textbf{B.} Articles 16 et 21 : quinze jours au maximum, sur ordre du jour déterminé. \\
+\addlinespace[1pt]
+12 & \textbf{B.} Article 20, alinéa 3 : quarante ans révolus à la date de l'élection ou de la nomination. \\
+\addlinespace[1pt]
+13 & \textbf{B.} Article 25 : initiative concurrente du Président de la République et des membres du Parlement. \\
+\addlinespace[1pt]
+14 & \textbf{B.} Le texte d'origine parlementaire est une proposition de loi ; celui du Président, un projet de loi. \\
+\addlinespace[1pt]
+15 & \textbf{B.} Article 30, alinéa 3 : dix jours, ramenés à cinq jours en cas d'urgence déclarée par le Gouvernement. \\
+\addlinespace[1pt]
+16 & \textbf{A.} Article 31, alinéa 1 : quinze jours, sauf seconde lecture ou saisine du Conseil constitutionnel. \\
+\addlinespace[1pt]
+17 & \textbf{B.} Article 34, alinéa 3 : au moins un tiers des membres de l'Assemblée nationale. \\
+\addlinespace[1pt]
+18 & \textbf{C.} Article 34, alinéa 3 : deux tiers des membres composant l'Assemblée ; seuls les votes favorables sont recensés. \\
+\addlinespace[1pt]
+19 & \textbf{B.} Article 6 révisé en 2026 : le Vice-Président achève le mandat ; si le poste n'est pas pourvu ou si son titulaire est empêché, scrutin dans 20 à 120 jours avec intérim du Président du Sénat. \\
+\addlinespace[1pt]
+20 & \textbf{A.} Article 14, alinéa 4 : les deux chambres réunies en Congrès. \\
+\addlinespace[1pt]
+21 & \textbf{B.} Article 53, alinéa 2 : vote identique des deux chambres, au scrutin public, à la majorité des quatre cinquièmes. \\
+\addlinespace[1pt]
+22 & \textbf{B.} Article 9, alinéa 2 : proclamation par décret du Président de la République. \\
+\addlinespace[1pt]
+23 & \textbf{A.} Article 8, alinéa 7 : après avis du Conseil supérieur de la magistrature. \\
+\addlinespace[1pt]
+24 & \textbf{B.} Article 26, alinéa 2, c, 6 : domaine de la loi. \\
+\addlinespace[1pt]
+25 & \textbf{B.} Article 49 : quinze jours, ramenés à huit à la demande du Président de la République. \\
+\addlinespace[1pt]
 \bottomrule
 \end{longtable}
-
 \section{Sujets de rédaction possibles}
 \begin{enumerate}
-  \item Le Président de la République : statut, élection et pouvoirs.
-  \item Le bicamérisme au Cameroun.
+  \item Le Président de la République : statut, élection et attributions.
+  \item Le bicamérisme camerounais : unité de fonction, inégalité de pouvoirs.
   \item Comparez l'Assemblée nationale et le Sénat.
-  \item La procédure d'adoption d'une loi au Cameroun.
-  \item Le contrôle du Gouvernement par le Parlement.
-  \item La vacance de la Présidence après la réforme constitutionnelle de 2026.
-  \item Le rôle constitutionnel du Président de la République dans la protection de la sécurité et de l'intégrité du territoire.
+  \item La procédure d'adoption d'une loi au Cameroun, du dépôt à la publication.
+  \item Le contrôle de l'action gouvernementale par le Parlement.
+  \item La vacance de la Présidence de la République après la révision de 2026.
+  \item Les pouvoirs de crise du Président de la République et les garanties des libertés.
+  \item Le rôle du Conseil constitutionnel dans l'équilibre des institutions.
 \end{enumerate}
-
-% ==================== ANNEXES ====================
-\appendix
-\chapter{Annexes de révision}
-
-\section{Articles à relire en priorité}
-\begin{tabularx}{\textwidth}{>{\bfseries\color{navy}}p{0.2\textwidth} X}
+\chapter{Annexes}
+\section{Les articles à relire en priorité}
+\begin{longtable}{>{\raggedright\arraybackslash}p{0.149\textwidth} >{\raggedright\arraybackslash}p{0.781\textwidth}}
 \toprule
-Articles & Ce qu'il faut savoir\
-\midrule
-1–4 & Nature de l'État, souveraineté, partis, autorités de l'État.\
-5–10 & Président de la République : rôle, élection, serment, pouvoirs, crise, Gouvernement et Vice-Président.\
-11–13 & Gouvernement, Premier ministre et incompatibilités.\
-14–24 & Parlement, sessions, Congrès, Assemblée nationale et Sénat.\
-25–31 & Initiative, domaine de la loi, ordonnances, navette et promulgation.\
-32–36 & Messages, accès du Gouvernement, confiance, censure, référendum.\
-46–50 & Conseil constitutionnel et élections.\
-53 & Haute Cour de justice et mise en accusation du Président.\
-63–66 & Révision constitutionnelle, préambule, déclaration des biens.\
+\textbf{\color{navy}Articles} & \textbf{\color{navy}Contenu} \\
+\midrule\endhead
+1 à 4 & Nature de l'État, souveraineté, partis politiques, autorités de l'État \\
+\addlinespace[1pt]
+5 à 10 & Président de la République : statut, élection, serment, attributions, crises, nominations, Vice-Président \\
+\addlinespace[1pt]
+11 à 13 & Gouvernement, Premier ministre, incompatibilités \\
+\addlinespace[1pt]
+14 & Parlement : composition, missions, sessions, Congrès \\
+\addlinespace[1pt]
+15 à 19 & Assemblée nationale \\
+\addlinespace[1pt]
+20 à 24 & Sénat \\
+\addlinespace[1pt]
+25 à 31 & Initiative, domaine de la loi, ordonnances, navette, promulgation \\
+\addlinespace[1pt]
+32 à 36 & Messages, accès du Gouvernement, confiance et censure, contrôle, référendum \\
+\addlinespace[1pt]
+37 à 42 & Pouvoir judiciaire et Cour suprême \\
+\addlinespace[1pt]
+43 à 45 & Traités et accords internationaux \\
+\addlinespace[1pt]
+46 à 52 & Conseil constitutionnel \\
+\addlinespace[1pt]
+53 & Haute Cour de justice et mise en accusation \\
+\addlinespace[1pt]
+55 à 62 & Collectivités territoriales décentralisées et régions \\
+\addlinespace[1pt]
+63 à 66 & Révision, préambule, déclaration des biens \\
+\addlinespace[1pt]
 \bottomrule
-\end{tabularx}
-
-\section{Chronologie institutionnelle à retenir}
-\begin{tabularx}{\textwidth}{>{\bfseries\color{navy}}p{0.22\textwidth} X}
+\end{longtable}
+\section{Chronologie institutionnelle}
+\begin{longtable}{>{\raggedright\arraybackslash}p{0.186\textwidth} >{\raggedright\arraybackslash}p{0.744\textwidth}}
 \toprule
-Date & Repère\
-\midrule
-2 juin 1972 & Constitution de l'État unitaire.\
-18 janvier 1996 & Révision générale : décentralisation et bicamérisme prévus.\
-14 avril 2008 & Modification de l'article 6 : Président rééligible ; ajustements sur sessions et vacance.\
-14 avril 2013 & Première mise en place du Sénat : 70 élus et 30 nommés.\
-6 novembre 2025 & Prestation de serment de Paul BIYA pour le mandat issu de la présidentielle de 2025.\
-14 avril 2026 & Loi n°\,2026/002 : Vice-Président et nouveau mécanisme de vacance ; modifications ciblées.\
-17 mars 2026 & Aboubakary ABDOULAYE devient Président du Sénat ; Théodore DATOUO est présenté par l'Assemblée comme son Président à la date de ce document.\
-17 septembre 2026 & Date de mise à jour de cette édition.\
+\textbf{\color{navy}Date} & \textbf{\color{navy}Repère} \\
+\midrule\endhead
+1er janvier 1960 & Indépendance du Cameroun \\
+\addlinespace[1pt]
+2 juin 1972 & Constitution de l'État unitaire \\
+\addlinespace[1pt]
+4 février 1984 & La République unie du Cameroun devient la République du Cameroun ; suppression de la vice-présidence héritée des textes antérieurs \\
+\addlinespace[1pt]
+18 janvier 1996 & Loi n° 96/06 : révision générale ; décentralisation, Sénat, Conseil constitutionnel prévus \\
+\addlinespace[1pt]
+19 avril 2012 & Loi n° 2012/001 portant Code électoral \\
+\addlinespace[1pt]
+14 avril 2008 & Loi n° 2008/001 : le Président devient rééligible ; sessions ordinaires en mars, juin et novembre ; ajustements sur la vacance, le Conseil constitutionnel et la Haute Cour \\
+\addlinespace[1pt]
+2013 & Installation effective du Sénat (70 élus, 30 nommés) \\
+\addlinespace[1pt]
+4 avril 2026 & Le Parlement réuni en Congrès adopte la révision créant le poste de Vice-Président \\
+\addlinespace[1pt]
+14 avril 2026 & Promulgation de la révision constitutionnelle de 2026 \\
+\addlinespace[1pt]
+17 mars 2026 & Théodore Datouo élu Président de l'Assemblée nationale ; Aboubakary Abdoulaye élu Président du Sénat \\
+\addlinespace[1pt]
+17 septembre 2026 & Date d'arrêt des données de ce document \\
+\addlinespace[1pt]
 \bottomrule
-\end{tabularx}
-
+\end{longtable}
 \section{Glossaire}
-\begin{description}[style=nextline,leftmargin=3.1cm,labelwidth=2.8cm]
+\begin{description}[style=nextline,leftmargin=3.2cm,labelwidth=2.9cm]
   \item[Amendement] Modification proposée à un texte en cours d'examen.
-  \item[Congrès] Réunion de l'Assemblée nationale et du Sénat dans les cas constitutionnels.
-  \item[Décret] Acte réglementaire pris par l'autorité compétente, notamment le Président dans les matières prévues.
-  \item[Immunité] Protection juridique prévue par les textes pour l'exercice d'un mandat ; elle ne se confond pas avec l'impunité.
-  \item[Majorité absolue] Plus de la moitié des membres composant l'organe, selon la règle applicable.
-  \item[Majorité simple] Majorité des suffrages ou des membres selon le texte concerné ; toujours vérifier le libellé de l'article.
+  \item[Amnistie] Mesure législative qui efface l'infraction elle-même ; à distinguer de la grâce.
+  \item[Bicamérisme] Organisation du Parlement en deux chambres.
+  \item[Caducité] Perte d'effet d'un texte, que le Président peut déclarer en cas d'échec de la navette.
+  \item[Congrès] Réunion de l'Assemblée nationale et du Sénat dans les cas prévus par l'article 14.
+  \item[Commission mixte paritaire] Commission réunissant députés et sénateurs pour proposer un texte commun.
+  \item[Décret] Acte réglementaire du Président de la République ou du Premier ministre.
+  \item[Grâce] Dispense totale ou partielle d'exécution d'une peine, accordée par le Président.
+  \item[Immunité] Protection juridique attachée à une fonction ; elle n'est pas une impunité.
+  \item[Majorité absolue] Plus de la moitié des membres composant l'organe.
+  \item[Majorité simple] Majorité des suffrages exprimés lors du vote.
+  \item[Mandat impératif] Instruction contraignante donnée à un élu ; il est nul en droit camerounais.
   \item[Navette] Circulation d'un texte entre l'Assemblée nationale et le Sénat.
-  \item[Ordonnance] Acte pris par le Président dans une matière législative après habilitation du Parlement, dans un délai et pour un objet déterminés.
-  \item[Promulgation] Acte par lequel le Président atteste l'existence de la loi et ordonne son exécution.
-  \item[Questeur] Membre du bureau chargé notamment des services administratifs et financiers de la chambre.
-  \item[Rééligible] Qui peut être élu à nouveau ; ne signifie pas « limité à un seul renouvellement ».
-  \item[Suffrages exprimés] Votes valablement exprimés, à distinguer des bulletins nuls ou blancs selon les règles électorales.
+  \item[Ordonnance] Acte pris par le Président dans une matière législative, sur habilitation du Parlement.
+  \item[Promulgation] Acte par lequel le Président atteste l'existence de la loi et en ordonne l'exécution.
+  \item[Questeur] Membre du bureau chargé des services administratifs et financiers de la chambre.
+  \item[Rééligible] Qui peut être élu à nouveau, sans limitation du nombre de mandats.
+  \item[Suffrages exprimés] Votes valablement émis, hors bulletins nuls et blancs.
+  \item[Vacance] Situation dans laquelle la Présidence est privée de titulaire par décès, démission ou empêchement définitif.
 \end{description}
+\chapter{Sources et vérification}
+Les règles exposées proviennent des textes normatifs ci-dessous. Les données d'actualité (titulaires de fonctions) sont issues de sources de presse concordantes et sont datées dans le corps du document. Avant l'épreuve, vérifier la dernière version publiée au Journal officiel.
 
-\chapter{Sources et vérifications}
-\small
-\RaggedRight
-Les liens ci-dessous ont été consultés pour cette édition ; les textes normatifs doivent être relus dans leur version officielle la plus récente. Les sites institutionnels peuvent contenir des pages de présentation plus anciennes : la date et la nature de chaque information ont donc été signalées dans le cours.
-
-\begin{description}[style=nextline,leftmargin=1.25cm,labelwidth=0.95cm]
-  \item[\hypertarget{src:S1}{S1}] \textbf{Présidence de la République du Cameroun}, « Constitution », loi n°\,96/06 du 18 janvier 1996 et loi n°\,2008/001 du 14 avril 2008. \url{https://www.prc.cm/fr/le-cameroun/constitution}
-  \item[\hypertarget{src:S2}{S2}] \textbf{Présidence de la République du Cameroun}, loi n°\,2026/002 du 14 avril 2026 modifiant et complétant certaines dispositions de la Constitution. \url{https://www.prc.cm/en/news/the-acts/laws/8241-law-no-2026-002-of-14-april-2026-to-amend-and-supplement-the-constitution-of-2-june-1972-as-amended-and-supplemented-by-law-no-96-06-of-18-january-1996-and-law-no-2008-001-of-14-april-2008}
-  \item[\hypertarget{src:S3}{S3}] \textbf{Digithèque Jean-Pierre Maury}, Constitution camerounaise, transcription consolidée et utile pour la lecture article par article. \url{https://mjp.univ-perp.fr/constit/cm2008.htm}
-  \item[\hypertarget{src:S4}{S4}] \textbf{Assemblée nationale du Cameroun}, Organisation et fonctionnement de l'Assemblée nationale. \url{https://www.assnat.cm/index.php/fr/national-assembly/organisation}
-  \item[\hypertarget{src:S5}{S5}] \textbf{Assemblée nationale du Cameroun}, règlement intérieur et instruments de travail parlementaire. \url{https://www.assnat.cm/index.php/en/national-assembly/governing-instrument}
-  \item[\hypertarget{src:S6}{S6}] \textbf{Assemblée nationale du Cameroun}, loi n°\,2012/001 du 19 avril 2012 portant Code électoral. \url{https://www.assnat.cm/images/lois-adoptees/code-electoral.pdf}
-  \item[\hypertarget{src:S7}{S7}] \textbf{Sénat du Cameroun}, Présentation du Sénat, composition, sessions, bureau et commissions. \url{https://senat.cm/?page_id=385}
-  \item[\hypertarget{src:S8}{S8}] \textbf{Sénat du Cameroun}, « Le Président du Sénat », mise à jour institutionnelle du 17 mars 2026. \url{https://senat.cm/?page_id=2581}
-  \item[\hypertarget{src:S11}{S11}] \textbf{Présidence de la République du Cameroun}, rôle constitutionnel du Président. \url{https://www.prc.cm/fr/le-president/role-constitutionnel}
-  \item[\hypertarget{src:S12}{S12}] \textbf{Présidence de la République du Cameroun}, prestation de serment de S.E. Paul BIYA, 6 novembre 2025. \url{https://www.prc.cm/fr/actualites/8043-prestation-de-serment-de-s-e-paul-biya}
-  \item[\hypertarget{src:S13}{S13}] \textbf{Assemblée nationale du Cameroun}, « Mot de bienvenue du Président de l'Assemblée nationale », page présentant Théodore DATOUO. \url{https://www.assnat.cm/index.php/fr/mot-de-bienvenue}
-  \item[\hypertarget{src:S15}{S15}] \textbf{AFP Factuel}, vérification de la fausse nomination de Franck Biya et état public des nominations au poste de Vice-Président. \url{https://factuel.afp.com/doc.afp.com.A7DJ2NQ}
-  \item[\hypertarget{src:S17}{S17}] \textbf{Assemblée nationale du Cameroun}, page d'accueil, chiffres de la 10\textsuperscript{e} législature. \url{https://www.assnat.cm/index.php/fr/}
+\begin{description}[style=nextline,leftmargin=1.3cm,labelwidth=1cm]
+  \item[S1] Constitution de la République du Cameroun (loi n° 96/06 du 18 janvier 1996 modifiant la Constitution du 2 juin 1972), texte officiel publié par l'Assemblée nationale \\ \url{https://www.assnat.cm/images/La_Constitution.pdf}
+  \item[S2] Loi n° 2008/001 du 14 avril 2008 modifiant et complétant certaines dispositions de la Constitution (articles 6, 14, 15, 51, 53 et 67) \\ \url{https://www.prc.cm/fr/le-cameroun/constitution}
+  \item[S3] Révision constitutionnelle du 4 avril 2026, promulguée le 14 avril 2026 : création du poste de Vice-Président (modification des articles 5, 6, 7, 10, 53 et 66) \\ \url{https://www.stopblablacam.com/politique/0504-16070-le-parlement-adopte-une-revision-constitutionnelle-creant-le-poste-de-vice-president-de-la-republique}
+  \item[S4] Digithèque MJP (université de Perpignan), texte consolidé de la Constitution camerounaise, révisions de 2008 et de 2026 signalées article par article \\ \url{https://mjp.univ-perp.fr/constit/cm2008.htm}
+  \item[S5] Assemblée nationale du Cameroun — organisation, bureau, commissions générales \\ \url{https://www.assnat.cm/index.php/fr/national-assembly/organisation}
+  \item[S6] Loi n° 2012/001 du 19 avril 2012 portant Code électoral, modifiée et complétée \\ \url{https://www.assnat.cm/images/lois-adoptees/code-electoral.pdf}
+  \item[S7] Sénat du Cameroun — présentation, composition, bureau, sessions et commissions \\ \url{https://senat.cm/?page_id=385}
+  \item[S8] Présidence de la République du Cameroun — rôle constitutionnel du Chef de l'État \\ \url{https://www.prc.cm/fr/le-president/role-constitutionnel}
+  \item[S9] AFP Factuel — vérification : aucun Vice-Président n'avait été nommé au moment de la diffusion d'un faux décret (avril 2026) \\ \url{https://factuel.afp.com/doc.afp.com.A7DJ2NQ}
+  \item[S10] Élection des présidents des deux chambres le 17 mars 2026 (Théodore Datouo à l'Assemblée nationale, Aboubakary Abdoulaye au Sénat) \\ \url{https://www.koaci.com/article/2026/03/17/cameroun/politique/cameroun-aboubakary-abdoulaye-nouveau-president-du-senat_195139.html}
 \end{description}
-
-\normalsize
-\begin{keybox}
-\textbf{Dernier conseil :} le jour du concours, si une question demande un titulaire ou une composition politique, donner la date de référence. Si elle demande une compétence, citer l'article constitutionnel. La précision juridique vaut mieux qu'une réponse longue mais non sourcée.
+\begin{keybox}[title={À retenir — dernier conseil}]
+Le jour du concours : si la question porte sur un titulaire ou une composition politique, préciser la date de référence. Si elle porte sur une compétence, citer l'article de la Constitution. La précision juridique vaut mieux qu'une réponse longue.
 \end{keybox}
-
 \end{document}
